@@ -1,0 +1,18 @@
+{
+
+    "bot" : {
+        "clientId": "947989886026280990",
+        "token"   : "OTQ3OTg5ODg2MDI2MjgwOTkw.Yh1SYQ.f0PGQQEZ8uZqXF25kF7-sYkcfks",
+        "prefix"  : "$rt",
+        "guildId" : "793908257672265799",
+        "ownerId" : "377052236909379585"    
+    },
+
+    "categories" : [
+        {  "emoji" : "📋", "name" : "WhitelistMe", "id" : "908324747098595368" },
+        {  "emoji" : "🤖", "name" : "Bots para Discord", "id" : "908324747098595368" },
+        {  "emoji" : "💳",  "name" : "Pagos", "id" : "908324747098595368" },
+        {  "emoji" : "❓",  "name" : "Otras Preguntas", "id" : "908324747098595368" }
+    ]
+
+}
