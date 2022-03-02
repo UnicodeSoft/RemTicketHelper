@@ -9,10 +9,70 @@
     },
 
     "categories" : [
-        {  "emoji" : "📋", "name" : "WhitelistMe", "id" : "908324747098595368" },
-        {  "emoji" : "🤖", "name" : "Bots para Discord", "id" : "908324747098595368" },
-        {  "emoji" : "💳",  "name" : "Pagos", "id" : "908324747098595368" },
-        {  "emoji" : "❓",  "name" : "Otras Preguntas", "id" : "908324747098595368" }
-    ]
+        {
+            "emoji" : { "id" : "948361375099539476", "name" : "sel_ticket"},
+            "name" : "Soporte General",
+            "desc" : "Consultas que no califiquen en las otras categorías.",
+            "id" : "cat_1"
+        },
+        {
+            "emoji" : { "id" : "948361375120519188", "name" : "sel_plug"},
+            "name" : "Soporte Conexión",
+            "desc" : "Por si presentas inconvenientes al intentar conectar.",
+            "id" : "cat_2"
+        },
+        {
+            "emoji" : { "id" : "948361375049207879", "name" : "sel_gun"},
+            "name" : "Soporte Delictivos",
+            "desc" : "Consultas sobre bandas/mafias.",
+            "id" : "cat_3"
+        },
+        {
+            "emoji" : { "id" : "948361374998876260", "name" : "sel_party"},
+            "name" : "Organización de Eventos",
+            "desc" : "Para solicitar apoyo de la administración para un evento.",
+            "id" : "cat_4"
+        },
+        {
+            "emoji" : { "id" : "948361374919176213", "name" : "sel_police_light"},
+            "name" : "Presentar Reporte",
+            "desc" : "Para reportar situaciones de antirol.",
+            "id" : "cat_5"
+        },
+        {
+            "emoji" : { "id" : "948361374898204714", "name" : "sel_coin"},
+            "name" : "Soporte para Donaciones",
+            "desc" : "Realizar consultas o presentar comprobantes de pagos.",
+            "id" : "cat_6"
+        },
+        {
+            "emoji" : { "id" : "948361374860464238", "name" : "sel_camera"},
+            "name" : "Soporte para Creadores de Contenidos",
+            "desc" : "Para solicitar el Rol de Streamer.",
+            "id" : "cat_7"
+        },
+        {
+            "emoji" : { "id" : "948361374579433474", "name" : "sel_clipboard"},
+            "name" : "Presentá tu Historia",
+            "desc" : "Para presentar la historia y detalles de tu personaje.",
+            "id" : "cat_9"
+        },
+        {
+            "emoji" : { "id" : "948361374583652353", "name" : "sel_coffin"},
+            "name" : "Solicitud de CK",
+            "desc" : "Para solicitar la muerte de tu personaje.",
+            "id" : "cat_8"
+        },
+        {
+            "emoji" : { "id" : "948361374503944204", "name" : "sel_bookmark"},
+            "name" : "Apelar Sanción",
+            "desc" : "Por si crees que una sanción recibida fue injusta.",
+            "id" : "cat_10"
+        }
+    ],
+
+    "embed" : {
+        "footer" : { "text" : "🦄 by Unicodesoft | Todos los derechos reservados" }
+    }
 
 }
