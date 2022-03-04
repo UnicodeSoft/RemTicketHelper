@@ -3,5 +3,31 @@
     "better-sqlite3": "^7.5.0",
     "discord.js": "^13.6.0",
     "node-gyp": "^8.4.1"
-  }
+  },
+  "name": "remtickethelper",
+  "description": "🎫 Sistema de tickets de soporte para discord",
+  "version": "1.0.0",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/UnicodeSoft/RemTicketHelper.git"
+  },
+  "keywords": [
+    "tickettool",
+    "ticket",
+    "tool",
+    "discord",
+    "discord.js",
+    "sqlite"
+  ],
+  "author": "KuroNeko",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/UnicodeSoft/RemTicketHelper/issues"
+  },
+  "homepage": "https://github.com/UnicodeSoft/RemTicketHelper#readme"
 }

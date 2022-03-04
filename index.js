@@ -42,11 +42,8 @@ for(const prefixFile of prefixCommandFiles) {
     var commandName = prefixFile.split(".")[0];
     var command = require(`./commands/${prefixFile}`);
     client.commandsPrefix.set(commandName, command);
-    console.log(`[Init] Recurso cargado: ${commandName}`);
+    console.log(`[Init] Recurso de comando cargado: ${commandName}`);
 }
 
 // Define token a init bot =================================================================================================
 client.login(config.bot.token);
-
-
-client.on('error', console.log);
