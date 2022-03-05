@@ -6,6 +6,6 @@ module.exports = {
 
         console.log(`[🦄] Bot iniciado exitosamente como ${client.user.tag}!`);
 
-        client.user.setActivity(`${config.categories.length} categorías de tickets! 🎫`, {type: 'WATCHING'});
+        client.user.setActivity(`${config.guilds.length} servidores tickets! 🎫`, {type: 'WATCHING'});
     }
 }

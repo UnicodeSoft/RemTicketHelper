@@ -5,10 +5,11 @@ exports.run = (client, message, args) => {
 
     message.delete();
 
+    const guild_id = message.guildId;
     var categorias = [];
 
-    for(let index = 0; index < config.categories.length; index++) {
-        var data = config.categories[index];
+    for(let index = 0; index < config.guilds[guild_id].length; index++) {
+        var data = config.guilds[guild_id][index];
 
         categorias.push({
             label: data.name,
@@ -27,9 +28,9 @@ exports.run = (client, message, args) => {
 
     const embed_content = [{
         color: 0xcc3366,
-        title: '🎫 Sistema de Soporte',
-        description: 'Para abrir un ticket de soporte, selecciona en la lista de abajo la categoría mas adecuada y nuestro staff te estará atendiendo en la brevedad posible.',
-        footer: config.embed.footer
+        title: config.main_open_ticket.title,
+        description: config.main_open_ticket.description,
+        footer: config.embed_content.footer
     }];
 
 
