@@ -13,11 +13,7 @@
                 "emoji" : { "id" : "948361375099539476", "name" : "sel_ticket"},
                 "name" : "Soporte General",
                 "desc" : "Consultas que no califiquen en las otras categorías.",
-                "allowed_staff" : [
-                    949842918473105478,
-                    949842936626032701,
-                    949842940140847104
-                ],
+                "allowed_staff" : "949842918473105478",
                 "limit" : 5,
                 "id" : "949843267309142036"
             },
@@ -25,15 +21,9 @@
                 "emoji" : { "id" : "948361375120519188", "name" : "sel_plug"},
                 "name" : "Soporte Conexión",
                 "desc" : "Por si presentas inconvenientes al intentar conectar.",
-                "allowed_staff" : [
-                    1,
-                    2,
-                    3,
-                    4,
-                    5
-                ],
+                "allowed_staff" : "949842936626032701",
                 "limit" : 5,
-                "id" : "cat_2"
+                "id" : "949876992306737152"
             },
             {
                 "emoji" : { "id" : "948361375049207879", "name" : "sel_gun"},

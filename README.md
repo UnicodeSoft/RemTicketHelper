@@ -19,10 +19,7 @@
                 "emoji" : { "id" : "id_del_emoji_custom", "name" : "nombre_del_emoji_custom"},
                 "name" : "nombre de la categoría (ej: Soporte Técnico)",
                 "desc" : "una breve descripción de hasta 50 caractéres (de pasarse el límite, no se leerá mas desde el cliente de PC o navegador)",
-                "allowed_staff" : [
-                    "el id de cada rol que deberá poder ver esta categoría",
-                    "..."
-                ],
+                "allowed_staff" : "el id del rol que podrá ver esta categoría",
                 "id" : "id único de la categoría donde se crearán los tickets (cada categoría para ticket que crees, deberá tener su propia categoría en el discord)"
             },
             " ^ copiar el esquema de arriba según cada categoría que vayas a necesitar"

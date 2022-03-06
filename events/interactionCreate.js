@@ -11,6 +11,8 @@ const { MessageActionRow, MessageButton } = require('discord.js');
 const dayjs = require('dayjs');
 const timezone = require('dayjs/plugin/timezone');
 
+// This thing...
+const wait = require('node:timers/promises').setTimeout;
 
 module.exports = {
     name: 'interactionCreate',
@@ -29,11 +31,10 @@ module.exports = {
         const guild = interaction.guildId;
         const user = interaction.user.id;
 
+        interaction.deferUpdate();
+
         switch(interaction.componentType) {
             case 'SELECT_MENU':
-
-                console.log(interaction.values[0]);
-
                 const menu_id = interaction.values[0];
 
                 const category_info = Object.values(config.guilds[guild]).flat().find(r => r.id === menu_id);
@@ -43,34 +44,22 @@ module.exports = {
                     return interaction.reply({ content: "🎫 Has alcanzado el límite de tickets abiertos en esta categoría...", ephemeral: true });
                 }
 
-                interaction.reply({ content: "🎫 Abriendo ticket, por favor espera...", ephemeral: true });
+                await wait(1000); // no funciona...
 
-
-                // averiguar bien como es el sistema de add/remove permisos a canales para crear
-
-                var permissions_list = [];
-                
-                permissions_list.push({
-                    id: channel.guild.roles.everyone,
-                    allow: [ 'VIEW_CHANNEL' ],
-                });
-
-                for(let index = 0; index < category_info.allowed_staff.length; index++) {
-                    var data = category_info.allowed_staff[index];
-
-                    console.log(`Rol: ${data}`);
-
-                    permissions_list.push({
-                        id: data,
-                        allow: [ 'VIEW_CHANNEL' ],
-                    });
-                }
-
-                interaction.guild.channels.create('ticket_name', {
+                await interaction.guild.channels.create('ticket_name', {
                     type: 'text',
                     parent: category_info.id,
-                    permissionOverwrites: [ permissions_list ]
+                    permissionOverwrites: [
+                        { id: interaction.member.guild.roles.everyone.id, deny: [ 'VIEW_CHANNEL' ] },
+                        { id: interaction.guild.members.cache.get(user), allow: [ 'VIEW_CHANNEL', 'SEND_MESSAGES' ] },
+                        { id: category_info.allowed_staff, allow: [ 'VIEW_CHANNEL', 'SEND_MESSAGES' ] }
+                    ]
+                }).then(async (channel) => {
+                    channel.send(`Hi <@${user}>`);
+                    // add para guardar en la base de datos
+                    // add para que la respuesta sea con embed y botoncitos
                 });
+
             break;
             /* ============================================================================================================================== */
             case 'BUTTON': // Botones de accion (para cerrar el ticket)
