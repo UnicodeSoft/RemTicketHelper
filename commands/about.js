@@ -1,4 +1,4 @@
-const config = require('../config.json');
+const config = require('../data/config.json');
 
 exports.run = (client, message, args) => {
     const prefix = config.bot.prefix;

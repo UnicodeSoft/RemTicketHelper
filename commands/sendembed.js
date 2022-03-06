@@ -1,4 +1,4 @@
-const config = require('../config.json');
+const config = require('../data/config.json');
 const { MessageActionRow, MessageSelectMenu } = require('discord.js');
 
 exports.run = (client, message, args) => {
@@ -28,8 +28,8 @@ exports.run = (client, message, args) => {
 
     const embed_content = [{
         color: 0xcc3366,
-        title: config.main_open_ticket.title,
-        description: config.main_open_ticket.description,
+        title: config.embed_content.main_open_ticket.title,
+        description: config.embed_content.main_open_ticket.description,
         footer: config.embed_content.footer
     }];
 
