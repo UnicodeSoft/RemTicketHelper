@@ -1,5 +1,5 @@
 // Load configuration files ================================================================================================
-const config = require('./config.json');
+const config = require('./data/config.json');
 
 // Load required resources =================================================================================================
 const fs = require('fs');
@@ -17,16 +17,7 @@ const client = new Client({
     ]
 });
 
-// Handle :: Buttons Actions ===============================================================================================
-const buttons = fs.readdirSync('./buttons').filter(file => file.endsWith('.js'));
-for(const button of buttons) {
-    const buttonName = button.split('.')[0];
-    const event = require(`./buttons/${button}`);
-    client.on(event.name, (...args) => event.execute(...args));
-    console.log(`[Init] Recurso cargado: ${buttonName}`);
-}
-
-// Handle :: Events ========================================================================================================
+// Handle del discord.js para la gestión de tickets según eventos ==========================================================
 const events = fs.readdirSync('./events').filter(file => file.endsWith('.js'));
 for(const file of events) {
     const eventName = file.split('.')[0];
@@ -35,7 +26,7 @@ for(const file of events) {
     console.log(`[Init] Evento cargado:  ${eventName}`);
 }
 
-// Custom Commands (with prefix) ===========================================================================================
+// Comandos para gestión de tickets creados (y comandos utilitarios) =======================================================
 client.commandsPrefix = new Collection();
 const prefixCommandFiles = fs.readdirSync('./commands').filter(file => file.endsWith(".js"));
 for(const prefixFile of prefixCommandFiles) {
