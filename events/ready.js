@@ -15,6 +15,6 @@ module.exports = {
         console.log(`[🦄] Bot iniciado exitosamente como ${client.user.tag} a las ${timestamp}!`);
 
         // Definir actividad al bot
-        client.user.setActivity(`${config.guilds.length} servidores tickets! 🎫`, {type: 'WATCHING'});
+        client.user.setActivity("los tickets de soporte creados! 🎫", {type: 'WATCHING'});
     }
 }
