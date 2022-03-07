@@ -14,7 +14,6 @@ exports.run = (client, message, args) => {
             { inline: false, name: `${prefix} sendembed`, value: 'Enviar el mensaje con el menú de categorías de tickets.' },
             { inline: false, name: `${prefix} delete`, value: 'Borrar un ticket.' },
             { inline: false, name: `${prefix} info`, value: 'Ver el estado de bot (uptime & recursos).' },
-            { inline: false, name: `${prefix} tickets`, value: 'Ver un historico de tickets (total abiertos por categoría).' },
             { inline: false, name: `${prefix} close`, value: 'Cerrar un ticket. (Inhabilita la lectura al usuario que abrió el ticket).' },
             { inline: false, name: `${prefix} reopen`, value: 'Reabrir un ticket. (Rehabilita la lectura al usuario que abrió el ticket).' },
             { inline: false, name: `${prefix} ban <@user>`, value: 'Banear a un usuario para que no utilice el sistema de tickets. (Baneo persistente, en caso de salir y volver al servidor, esta prohibición persistirá).' },

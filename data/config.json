@@ -103,7 +103,7 @@
             "description" : "Para abrir un ticket de soporte, selecciona en la lista de abajo la categoría mas adecuada y nuestro staff te estará atendiendo en la brevedad posible."
         },
         "ticket_opened" : {
-            "title" : "Bienvenido {user_mention} a nuestro sistema de tickets para {catname_mention}!",
+            "title" : "Bienvenido a nuestro sistema de tickets para {catname_mention}!",
             "description" : "Por favor explayese lo mas posible por este medio y, uno de nuestros staff te estará ayudando en la brevedad.\n Si abriste este ticket por error, utiliza el siguiente comando: `{prefix_mention} delete`"
         },
         "ticket_closed" : {

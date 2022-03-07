@@ -1,5 +1,5 @@
 // Custom functions 💜
-const { updateTicketToClosed } = require('../functions.js');
+const { updateTicketToDeleted } = require('../functions.js');
 
 module.exports = {
     name: 'channelDelete',
@@ -9,6 +9,6 @@ module.exports = {
         const categoryId = channel.parentId;
         const channelId = channel.id;
 
-        updateTicketToClosed(guildId, categoryId, channelId);
+        updateTicketToDeleted(guildId, categoryId, channelId);
     }
 }

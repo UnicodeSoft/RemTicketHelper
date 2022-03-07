@@ -69,24 +69,82 @@ module.exports = {
                     parent: category_info.id,
                     permissionOverwrites: allowed_staff
                 }).then(async (channel) => {
-                    saveNewTicket(newTicketId, guild, category_info.id, channel.id, user);
+                    saveNewTicket(guild, category_info.id, channel.id, user);
 
                     await int.followUp({
                         content: `🎫 Tu ticket se ha creado: <#${channel.id}>`,
                         ephemeral: true
                     });
 
-                    /*
-                    channel.send({
-                        content: `Hola <@${user}>! Bienvenido al sistema de tickets`
-                        embed: ''
-                    });
-                    */
+                    const embed_welcome = [{
+                        color: 0xcc3366,
+                        title: config.embed_content.ticket_opened.title.replace('{catname_mention}', category_info.name),
+                        description: config.embed_content.ticket_opened.description.replace('{prefix_mention}', config.bot.prefix),
+                        footer: config.embed_content.footer
+                    }];
+
+                    const btns_ticket =  new MessageActionRow()
+                        .addComponents(
+                            new MessageButton().setCustomId(`close;${channel.id}`).setLabel('Cerrar Ticket').setStyle('DANGER')
+                        );
+
+                    channel.send({ content: `Hola <@${user}>!`, embeds: embed_welcome, components: [ btns_ticket ] });
                 });
             break;
             /* ============================================================================================================================== */
             case 'BUTTON': // Botones de accion (para cerrar el ticket)
                 const button_id = int.customId;
+                const data = button_id.explode(';');
+                const action = data[0];
+                const channel_id = data[1];
+
+                switch(action) {
+                    case 'closed':
+                        const embed_closed = [{
+                            color: 0xcc3366,
+                            title: config.embed_content.ticket_closed.title,
+                            description: config.embed_content.ticket_closed.description.replace('{prefix_mention}', config.bot.prefix),
+                            footer: config.embed_content.footer
+                        }];
+    
+                        const btns_ticket_closed =  new MessageActionRow()
+                            .addComponents(
+                                new MessageButton().setCustomId(`close;${channel.id}`).setLabel('Cerrar Ticket').setStyle('DANGER')
+                            );
+                        int.send({ content: `Hola <@${user}>!`, embeds: embed_closed, components: [ btns_ticket_closed ] });
+                    break;
+                    /* ================================================================================================================= */
+                    case 'reopen':
+                        const embed_reopen = [{
+                            color: 0xcc3366,
+                            title: config.embed_content.ticket_opened.title.replace('{catname_mention}', category_info.name),
+                            description: config.embed_content.ticket_opened.description.replace('{prefix_mention}', config.bot.prefix),
+                            footer: config.embed_content.footer
+                        }];
+    
+                        const btns_ticket_reopen =  new MessageActionRow()
+                            .addComponents(
+                                new MessageButton().setCustomId(`close;${channel.id}`).setLabel('Cerrar Ticket').setStyle('DANGER')
+                            );
+                        int.send({ content: `Hola <@${user}>!`, embeds: embed_reopen, components: [ btns_ticket_reopen ] });
+                    break;
+                    /* ================================================================================================================= */
+                    case 'delete':
+                        const embed_delete = [{
+                            color: 0xcc3366,
+                            title: config.embed_content.ticket_opened.title.replace('{catname_mention}', category_info.name),
+                            description: config.embed_content.ticket_opened.description.replace('{prefix_mention}', config.bot.prefix),
+                            footer: config.embed_content.footer
+                        }];
+    
+                        const btns_ticket_delete =  new MessageActionRow()
+                            .addComponents(
+                                new MessageButton().setCustomId(`close;${channel.id}`).setLabel('Cerrar Ticket').setStyle('DANGER'),
+                                new MessageButton().setCustomId(`close;${channel.id}`).setLabel('Cerrar Ticket').setStyle('DANGER'),
+                            );
+                        int.send({ content: `Hola <@${user}>!`, embeds: embed_delete, components: [ btns_ticket_delete ] });
+                    break;
+                }
             break;
         }
     }
