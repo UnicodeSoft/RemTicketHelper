@@ -22,6 +22,20 @@ module.exports = {
         return num.toString().padStart(5, '0');
     },
 
+    updateTicketToClosed: function(guild, category, channel) {
+        dayjs.extend(timezone);
+        dayjs.tz.setDefault(config.bot.timezone);
+        const timestamp = dayjs().format('YYYY-MM-DD HH:mm:ss');
+
+        const query = sql.prepare(" UPDATE tickets SET status = 'D', timestamp_closed = @tms WHERE guild = @gld, category = @cat, channel = @chn; ");
+        query.run({
+            gld: guild,
+            cat: category,
+            chn: channel,
+            tms: timestamp
+        });
+    },
+
     saveNewTicket: function(ticket, guild, category, channel, user) {
         dayjs.extend(timezone);
         dayjs.tz.setDefault(config.bot.timezone);

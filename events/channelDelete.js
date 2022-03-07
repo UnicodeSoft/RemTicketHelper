@@ -1,12 +1,14 @@
-const config = require('../data/config.json');
+// Custom functions 💜
+const { updateTicketToClosed } = require('../functions.js');
 
 module.exports = {
     name: 'channelDelete',
     async execute(channel) {
 
-        // buscar por categoría... si existe en los que administra el bot, procesar como eliminado...
-        const category = channel.parentId;
+        const guildId = channel.guildId;
+        const categoryId = channel.parentId;
         const channelId = channel.id;
 
+        updateTicketToClosed(guildId, categoryId, channelId);
     }
 }
