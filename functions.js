@@ -10,41 +10,65 @@ const dayjs = require('dayjs');
 const timezone = require('dayjs/plugin/timezone');
 
 module.exports = {
-    userTicketsOnCat: function(user, guild, menu_id) {
-        const query = sql.prepare(" SELECT count(*) as count FROM tickets WHERE user = ? AND guild = ? AND category = ? AND status = 'A' ");
-        return query.get(user, guild, menu_id).count;
+    isTicket: function(channel_id, guild) {
+        const query = sql.prepare(" SELECT count(*) as count FROM tickets WHERE channel = ? AND guild = ? ");
+        if(query.get(channel_id, guild).count > 0) {
+            return true;
+        } else {
+            return false;
+        }
     },
 
-    getNewTicketId: function(guild, menu_id) {
-        const query = sql.prepare(" SELECT count(*) as count FROM tickets WHERE guild = ? AND category = ? ");
-        const num = parseInt(query.get(guild, menu_id).count + 1);
+    userTicketsOnCat: function(user, guild, category) {
+        const query = sql.prepare(" SELECT count(*) as count FROM tickets WHERE user = ? AND guild = ? AND category = ? AND status = 'A' ");
+        return query.get(user, guild, category).count;
+    },
 
+    getNewTicketId: function(guild, category) {
+        const query = sql.prepare(" SELECT count(*) as count FROM tickets WHERE guild = ? AND category = ? ");
+        const num = parseInt(query.get(guild, category).count + 1);
         return num.toString().padStart(5, '0');
     },
 
-    updateTicketToClosed: function(guild, category, channel) {
-        dayjs.extend(timezone);
-        dayjs.tz.setDefault(config.bot.timezone);
-        const timestamp = dayjs().format('YYYY-MM-DD HH:mm:ss');
+    getCurTicketId: function(guild, channel) {
+        const query = sql.prepare(" SELECT ticket FROM tickets WHERE guild = ? AND channel = ? ");
+        return query.get(guild, channel).ticket.toString().padStart(5, '0');
+    },
 
-        const query = sql.prepare(" UPDATE tickets SET status = 'C', timestamp_deletion = @tms WHERE guild = @gld AND category = @cat AND channel = @chn; ");
+    getUserCreator: function(guild, channel) {
+        const query = sql.prepare(" SELECT user FROM tickets WHERE guild = ? AND channel = ? ");
+        return query.get(guild, channel).user.toString();
+    },
+
+    getTicketCategory: function(guild, channel) {
+        const query = sql.prepare(" SELECT category FROM tickets WHERE guild = ? AND channel = ? ");
+        return query.get(guild, channel).category.toString();
+    },
+
+    updateToOpen: function(guild, channel) {
+        const query = sql.prepare(" UPDATE tickets SET status = 'A' WHERE guild = @gld AND channel = @chn; ");
         query.run({
             gld: guild,
-            cat: category,
-            chn: channel,
-            tms: timestamp
+            chn: channel
         });
     },
 
-    updateTicketToDeleted: function(guild, category, channel) {
+    updateToClosed: function(guild, channel) {
+        const query = sql.prepare(" UPDATE tickets SET status = 'C' WHERE guild = @gld AND channel = @chn; ");
+        query.run({
+            gld: guild,
+            chn: channel
+        });
+    },
+
+    updateToDeleted: function(guild, channel) {
         dayjs.extend(timezone);
         dayjs.tz.setDefault(config.bot.timezone);
         const timestamp = dayjs().format('YYYY-MM-DD HH:mm:ss');
 
-        const query = sql.prepare(" UPDATE tickets SET status = 'D', timestamp_deletion = @tms WHERE guild = @gld AND category = @cat AND channel = @chn; ");
+        const query = sql.prepare(" UPDATE tickets SET status = 'D', timestamp_deletion = @tms WHERE guild = @gld AND channel = @chn; ");
         query.run({
             gld: guild,
-            cat: category,
             chn: channel,
             tms: timestamp
         });

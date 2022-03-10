@@ -1,4 +1,5 @@
 const config = require('../data/config.json');
+const emb = require('../data/embeds.json');
 
 exports.run = (client, message, args) => {
     const prefix = config.bot.prefix;
@@ -19,7 +20,7 @@ exports.run = (client, message, args) => {
             { inline: false, name: `${prefix} ban <@user>`, value: 'Banear a un usuario para que no utilice el sistema de tickets. (Baneo persistente, en caso de salir y volver al servidor, esta prohibición persistirá).' },
             { inline: false, name: `${prefix} unban <@user>`, value: 'Desbanear a un usuario para que pueda utilizar nuevamente el sistema de tickets.' },
         ],
-        footer: config.embed.footer
+        footer: emb.footer
     }];
 
     message.channel.send({ embeds: embed_content });

@@ -1,10 +1,11 @@
 {
     "bot" : {
-        "clientId" : "947989886026280990",
-        "token"    : "OTQ3OTg5ODg2MDI2MjgwOTkw.Yh1SYQ.f0PGQQEZ8uZqXF25kF7-sYkcfks",
-        "prefix"   : "$rt",
-        "ownerId"  : "377052236909379585",
-        "timezone" : "America/Asuncion"
+        "clientId"     : "947989886026280990",
+        "token"        : "OTQ3OTg5ODg2MDI2MjgwOTkw.Yh1SYQ.f0PGQQEZ8uZqXF25kF7-sYkcfks",
+        "prefix"       : "$rt",
+        "ownerId"      : "377052236909379585",
+        "timezone"     : "America/Asuncion",
+        "secDelTicket" : "10"
     },
 
     "guilds" : {
@@ -92,32 +93,8 @@
         ]
     },
 
-    "embed_content" : {
-        "footer" : {
-            "url" : "https://unicodesoft.net",
-            "icon_url": "https://i.imgur.com/4IDrwRx.png",
-            "text" : "🦄 by Unicodesoft | Todos los derechos reservados"
-        },
-        "main_open_ticket" : {
-            "title" : "🎫 Sistema de Soporte",
-            "description" : "Para abrir un ticket de soporte, selecciona en la lista de abajo la categoría mas adecuada y nuestro staff te estará atendiendo en la brevedad posible."
-        },
-        "ticket_opened" : {
-            "title" : "Bienvenido a nuestro sistema de tickets para {catname_mention}!",
-            "description" : "Por favor explayese lo mas posible por este medio y, uno de nuestros staff te estará ayudando en la brevedad.\n Si abriste este ticket por error, utiliza el siguiente comando: `{prefix_mention} delete`"
-        },
-        "ticket_closed" : {
-            "title" : "📘 Ticket Cerrado",
-            "description" : "El ticket ha sido marcado como cerrado; para eliminarlo utilice el comando `{prefix_mention} delete` o, `{prefix_mention} reopen` para abrir nuevamente el ticket."
-        },
-        "ticket_reopened" : {
-            "title" : "📖 Ticket Reabierto",
-            "description" : "El ticket ha sido abierto nuevamente por un staff."
-        },
-        "ticket_will_deleted" : {
-            "seconds" : "10",
-            "title" : "🗑 Ticket Eliminado",
-            "description" : "Este ticket será eliminado en unos segundos."
-        }
+    "tck" : {
+        "open"   : "ticket",
+        "closed" : "cerrado"
     }
 }
