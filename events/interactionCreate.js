@@ -82,10 +82,10 @@ module.exports = {
                     type: 'text',
                     parent: category_info.id,
                     permissionOverwrites: allowed_staff
-                }).then(async (newChannel) => {
+                }).then((newChannel) => {
                     saveNewTicket(guild, category_info.id, newChannel.id, user);
 
-                    await int.followUp({
+                    int.followUp({
                         content: `🎫 Tu ticket se ha creado: <#${newChannel.id}>`,
                         ephemeral: true
                     });
