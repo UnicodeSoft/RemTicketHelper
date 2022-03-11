@@ -52,8 +52,6 @@ exports.run = async (client, message, args) => {
                 ];
             }
 
-            console.log(channelEdit);
-
             channelEdit.edit({
                 permissionOverwrites: allowed_staff
             });
