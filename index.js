@@ -38,3 +38,8 @@ for(const prefixFile of prefixCommandFiles) {
 
 // Define token a init bot =================================================================================================
 client.login(config.bot.token);
+
+// Handle Error ============================================================================================================
+process.on('unhandledRejection', error => {
+    console.error('[❌] Error: ', error);
+});
