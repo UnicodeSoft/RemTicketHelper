@@ -91,10 +91,6 @@
                 "id" : "cat_10"
             }
         ]
-    },
-
-    "tck" : {
-        "open"   : "ticket",
-        "closed" : "cerrado"
     }
+
 }
