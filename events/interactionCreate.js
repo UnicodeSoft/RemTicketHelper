@@ -135,28 +135,23 @@ module.exports = {
 
                         int.guild.channels.fetch(channel).then( (channelEdit) => {
                             var userCreator = getUserCreator(guild, channel);
-                            var currId = getCurTicketId(guild, channel);
-                            var newName = config.tck.closed+'-'+currId;
-
-
                             var menu_id = getTicketCategory(guild, channel);
                             var category_info = Object.values(config.guilds[guild]).flat().find(r => r.id === menu_id);
 
                             if(category_info.allowed_staff.length > 0) {
                                 var allowed_staff = [
                                     { id: int.member.guild.roles.everyone.id, deny: [ 'VIEW_CHANNEL' ] },
-                                    { id: int.guild.members.cache.get(user), deny: [ 'VIEW_CHANNEL', 'SEND_MESSAGES' ] },
+                                    { id: int.guild.members.cache.get(userCreator), deny: [ 'VIEW_CHANNEL', 'SEND_MESSAGES' ] },
                                     { id: category_info.allowed_staff, allow: [ 'VIEW_CHANNEL', 'SEND_MESSAGES' ] }
                                 ];
                             } else {
                                 var allowed_staff = [
                                     { id: int.member.guild.roles.everyone.id, deny: [ 'VIEW_CHANNEL' ] },
-                                    { id: int.guild.members.cache.get(user), deny: [ 'VIEW_CHANNEL', 'SEND_MESSAGES' ] }
+                                    { id: int.guild.members.cache.get(userCreator), deny: [ 'VIEW_CHANNEL', 'SEND_MESSAGES' ] }
                                 ];
                             }
 
                             channelEdit.edit({
-                                name: newName,
                                 permissionOverwrites: allowed_staff
                             });
                         });
@@ -181,29 +176,24 @@ module.exports = {
                         await wait(750);
 
                         int.guild.channels.fetch(channel).then( (channelEdit) => {
-                            // int.guild.members.cache.get(userCreator)
                             var userCreator = getUserCreator(guild, channel);
-                            var currId = getCurTicketId(guild, channel);
-                            var newName = config.tck.open+'-'+currId;
-
                             var menu_id = getTicketCategory(guild, channel);
                             var category_info = Object.values(config.guilds[guild]).flat().find(r => r.id === menu_id);
 
                             if(category_info.allowed_staff.length > 0) {
                                 var allowed_staff = [
                                     { id: int.member.guild.roles.everyone.id, deny: [ 'VIEW_CHANNEL' ] },
-                                    { id: int.guild.members.cache.get(user), allow: [ 'VIEW_CHANNEL', 'SEND_MESSAGES' ] },
+                                    { id: int.guild.members.cache.get(userCreator), allow: [ 'VIEW_CHANNEL', 'SEND_MESSAGES' ] },
                                     { id: category_info.allowed_staff, allow: [ 'VIEW_CHANNEL', 'SEND_MESSAGES' ] }
                                 ];
                             } else {
                                 var allowed_staff = [
                                     { id: int.member.guild.roles.everyone.id, deny: [ 'VIEW_CHANNEL' ] },
-                                    { id: int.guild.members.cache.get(user), allow: [ 'VIEW_CHANNEL', 'SEND_MESSAGES' ] }
+                                    { id: int.guild.members.cache.get(userCreator), allow: [ 'VIEW_CHANNEL', 'SEND_MESSAGES' ] }
                                 ];
                             }
 
                             channelEdit.edit({
-                                name: newName,
                                 permissionOverwrites: allowed_staff
                             });
                         });
