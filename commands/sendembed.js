@@ -17,7 +17,7 @@ exports.run = (client, message, args) => {
                 label: data.name,
                 description: data.desc,
                 value: data.id,
-                emoji: { name: data.emoji.name, id: data.emoji.id }
+                emoji: data.emoji
             });
         }
     
