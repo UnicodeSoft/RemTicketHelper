@@ -42,14 +42,14 @@ exports.run = async (client, message, args) => {
 
             if(category_info.allowed_staff.length > 0) {
                 var allowed_staff = [
-                    { id: message.guild.roles.everyone.id, deny: [ 'VIEW_CHANNEL' ] },
-                    { id: message.guild.members.cache.get(userCreator), allow: [ 'VIEW_CHANNEL', 'SEND_MESSAGES' ] },
-                    { id: category_info.allowed_staff, allow: [ 'VIEW_CHANNEL', 'SEND_MESSAGES' ] }
+                    { id: message.guild.roles.everyone.id, deny: [ 'VIEW_CHANNEL', 'READ_MESSAGE_HISTORY' ] },
+                    { id: message.guild.members.cache.get(userCreator), allow: [ 'VIEW_CHANNEL', 'READ_MESSAGE_HISTORY', 'SEND_MESSAGES' ] },
+                    { id: category_info.allowed_staff, allow: [ 'VIEW_CHANNEL', 'READ_MESSAGE_HISTORY', 'SEND_MESSAGES' ] }
                 ];
             } else {
                 var allowed_staff = [
-                    { id: message.guild.roles.everyone.id, deny: [ 'VIEW_CHANNEL' ] },
-                    { id: message.guild.members.cache.get(userCreator), allow: [ 'VIEW_CHANNEL', 'SEND_MESSAGES' ] }
+                    { id: message.guild.roles.everyone.id, deny: [ 'VIEW_CHANNEL', 'READ_MESSAGE_HISTORY' ] },
+                    { id: message.guild.members.cache.get(userCreator), allow: [ 'VIEW_CHANNEL', 'READ_MESSAGE_HISTORY', 'SEND_MESSAGES' ] }
                 ];
             }
 
