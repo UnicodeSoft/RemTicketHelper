@@ -47,7 +47,7 @@ exports.run = (client, message, args) => {
                 }] });
             }
         });
-    
+
         function duration(duration, useMilli = false) {
             let remain = duration;
             let days = Math.floor(remain / (1000 * 60 * 60 * 24));

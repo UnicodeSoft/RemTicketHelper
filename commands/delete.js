@@ -13,13 +13,13 @@ exports.run = async (client, message, args) => {
     try {
         const guildId = message.guildId;
         const channelId = message.channelId;
-    
+
         if(!isTicket(channelId, guildId)) {
             return;
         }
-    
+
         const sec = config.bot.secDelTicket;
-    
+
         const embed_delete = [{
             color: 0xcc3366,
             title: template.delete.title,
@@ -27,13 +27,13 @@ exports.run = async (client, message, args) => {
             footer: footer
         }];
         message.reply({ embeds: embed_delete });
-    
+
         await wait(sec * 1000);
-    
+
         const toDelete = message.guild.channels.cache.get(channelId);
-    
+
         updateToDeleted(toDelete.guildId, toDelete.id);
-    
+
         toDelete.delete();
     } catch(error) {
         console.log(error);

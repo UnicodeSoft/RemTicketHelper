@@ -23,7 +23,7 @@ for(const file of events) {
     const eventName = file.split('.')[0];
     const event = require(`./events/${file}`);
     client.on(event.name, (...args) => event.execute(...args));
-    console.log(`[Init] Evento cargado:  ${eventName}`);
+    console.log(`[🔌] Evento cargado:  ${eventName}`);
 }
 
 // Comandos para gestión de tickets creados (y comandos utilitarios) =======================================================
@@ -33,7 +33,7 @@ for(const prefixFile of prefixCommandFiles) {
     var commandName = prefixFile.split(".")[0];
     var command = require(`./commands/${prefixFile}`);
     client.commandsPrefix.set(commandName, command);
-    console.log(`[Init] Recurso de comando cargado: ${commandName}`);
+    console.log(`[🔌] Recurso de comando cargado: ${commandName}`);
 }
 
 // Define token a init bot =================================================================================================
