@@ -3,7 +3,7 @@ const config = require('./data/config.json');
 
 // SQLite
 const SQLite = require('better-sqlite3');
-const sql = new SQLite('./data/ticket_db.sqlite');
+const sql = new SQLite('./data/db.sqlite');
 
 // Timezone
 const dayjs = require('dayjs');
