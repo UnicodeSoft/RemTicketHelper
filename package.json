@@ -9,7 +9,7 @@
   },
   "name": "remtickethelper",
   "description": "🎫 Sistema de tickets de soporte para discord",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
