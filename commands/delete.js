@@ -36,6 +36,6 @@ exports.run = async (client, message, args) => {
 
         toDelete.delete();
     } catch(error) {
-        console.log(error);
+        console.error(error);
     }
 }

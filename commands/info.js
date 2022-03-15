@@ -85,6 +85,6 @@ exports.run = (client, message, args) => {
             }
         }
     } catch(error) {
-        console.log(error);
+        console.error(error);
     }
 }

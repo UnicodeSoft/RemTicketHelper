@@ -37,6 +37,6 @@ exports.run = (client, message, args) => {
 
         message.channel.send({ embeds: embed_content, components: [row] });
     } catch(error) {
-        console.log(error);
+        console.error(error);
     }
 }
