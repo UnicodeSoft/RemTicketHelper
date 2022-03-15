@@ -26,6 +26,9 @@ module.exports = {
     name: 'interactionCreate',
     async execute(int) {
         try {
+
+            await wait(750);
+
             // 📘 Datos Necesarios
             const guild = int.guildId;
             const channel = int.channelId;
@@ -38,10 +41,8 @@ module.exports = {
                     var category_info = Object.values(config.guilds[guild]).flat().find(r => r.id === menu_id);
                     const total_open = userTicketsOnCat(user, guild, menu_id);
 
-                    console.log(`catId: ${category_info.name} | total: ${total_open}`);
-
                     const embed_content = [{
-                        color: 0xcc3366,
+                        color: template.main_embed.color,
                         title: template.main_embed.title,
                         description: template.main_embed.description,
                         footer: footer
@@ -95,7 +96,7 @@ module.exports = {
                         });
 
                         const embed_welcome = [{
-                            color: 0xcc3366,
+                            color: template.new.color,
                             title: template.new.title.replaceAll('{catname_mention}', category_info.name),
                             description: template.new.description.replaceAll('{prefix_mention}', config.bot.prefix),
                             footer: footer
@@ -110,7 +111,7 @@ module.exports = {
                     });
                 break;
                 /* ============================================================================================================================== */
-                case 'BUTTON': // Botones de accion (para cerrar el ticket)
+                case 'BUTTON': // Botones de accion (para gestionar el ticket)
                     const button_id = int.customId;
 
                     if(!isTicket(channel, guild)) {
@@ -120,7 +121,7 @@ module.exports = {
                     switch(button_id) {
                         case 'close':
                             const embed_closed = [{
-                                color: 0xcc3366,
+                                color: template.closed.color,
                                 title: template.closed.title,
                                 description: template.closed.description.replaceAll('{prefix_mention}', config.bot.prefix),
                                 footer: footer
@@ -166,7 +167,7 @@ module.exports = {
                         /* ================================================================================================================= */
                         case 'reopen':
                             const embed_reopen = [{
-                                color: 0xcc3366,
+                                color: template.reopened.color,
                                 title: template.reopened.title,
                                 description: template.reopened.description,
                                 footer: footer
@@ -210,7 +211,7 @@ module.exports = {
                             const sec = config.bot.secDelTicket;
 
                             const embed_delete = [{
-                                color: 0xcc3366,
+                                color: template.delete.color,
                                 title: template.delete.title,
                                 description: template.delete.description.replaceAll('{seconds}', sec),
                                 footer: footer

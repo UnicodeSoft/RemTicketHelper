@@ -11,84 +11,36 @@
     "guilds" : {
         "793908257672265799" : [
             {
-                "emoji" : { "id" : "948361375099539476", "name" : "sel_ticket"},
+                "emoji" : { "id" : "943216385281101944", "name" : "unicode"},
                 "name" : "Soporte General",
-                "desc" : "Consultas que no califiquen en las otras categorías.",
-                "allowed_staff" : "949842918473105478",
-                "limit" : 5,
-                "id" : "949843267309142036"
+                "desc" : "Para consultas que no califiquen en cualquier categoría.",
+                "allowed_staff" : "949842940140847104",
+                "limit" : "5",
+                "id" : "951906944812187709"
             },
             {
-                "emoji" : { "id" : "948361375120519188", "name" : "sel_plug"},
-                "name" : "Soporte Conexión",
-                "desc" : "Por si presentas inconvenientes al intentar conectar.",
-                "allowed_staff" : "949842936626032701",
-                "limit" : 5,
-                "id" : "949876992306737152"
+                "emoji" : { "id" : "823670493910663228", "name" : "whitelistme"},
+                "name" : "WhitelistMe",
+                "desc" : "Consultas y solicitudes sobre a la plataforma.",
+                "allowed_staff" : "951908166759776328",
+                "limit" : "5",
+                "id" : "951907069202677880"
             },
             {
-                "emoji" : { "id" : "948361375049207879", "name" : "sel_gun"},
-                "name" : "Soporte Delictivos",
-                "desc" : "Consultas sobre bandas/mafias.",
-                "allowed_staff" : "949842918473105478",
-                "limit" : 5,
-                "id" : "cat_3"
+                "emoji" : { "id" : "818254431346884608", "name" : "bootstrap"},
+                "name" : "Diseño/Desarrollo Web",
+                "desc" : "Consultas y solicitudes de diseño y desarrollo web.",
+                "allowed_staff" : "951908172875038741",
+                "limit" : "5",
+                "id" : "951907232914767913"
             },
             {
-                "emoji" : { "id" : "948361374998876260", "name" : "sel_party"},
-                "name" : "Organización de Eventos",
-                "desc" : "Para solicitar apoyo de la administración para un evento.",
-                "allowed_staff" : "949842918473105478",
-                "limit" : 5,
-                "id" : "cat_4"
-            },
-            {
-                "emoji" : { "id" : "948361374919176213", "name" : "sel_police_light"},
-                "name" : "Presentar Reporte",
-                "desc" : "Para reportar situaciones de antirol.",
-                "allowed_staff" : "949842918473105478",
-                "limit" : 5,
-                "id" : "cat_5"
-            },
-            {
-                "emoji" : { "id" : "948361374898204714", "name" : "sel_coin"},
-                "name" : "Soporte para Donaciones",
-                "desc" : "Realizar consultas o presentar comprobantes de pagos.",
-                "allowed_staff" : "949842918473105478",
-                "limit" : 5,
-                "id" : "cat_6"
-            },
-            {
-                "emoji" : { "id" : "948361374860464238", "name" : "sel_camera"},
-                "name" : "Soporte para Creadores de Contenidos",
-                "desc" : "Para solicitar el Rol de Streamer.",
-                "allowed_staff" : "949842918473105478",
-                "limit" : 5,
-                "id" : "cat_7"
-            },
-            {
-                "emoji" : { "id" : "948361374579433474", "name" : "sel_clipboard"},
-                "name" : "Presentá tu Historia",
-                "desc" : "Para presentar la historia y detalles de tu personaje.",
-                "allowed_staff" : "949842918473105478",
-                "limit" : 5,
-                "id" : "cat_9"
-            },
-            {
-                "emoji" : { "id" : "948361374583652353", "name" : "sel_coffin"},
-                "name" : "Solicitud de CK",
-                "desc" : "Para solicitar la muerte de tu personaje.",
-                "allowed_staff" : "949842918473105478",
-                "limit" : 5,
-                "id" : "cat_8"
-            },
-            {
-                "emoji" : { "id" : "948361374503944204", "name" : "sel_bookmark"},
-                "name" : "Apelar Sanción",
-                "desc" : "Por si crees que una sanción recibida fue injusta.",
-                "allowed_staff" : "949842918473105478",
-                "limit" : 5,
-                "id" : "cat_10"
+                "emoji" : { "id" : "818254431844827158", "name" : "nodejs"},
+                "name" : "Desarrollo de Bots",
+                "desc" : "Consultas y solicitudes de desarrollo de bots para Discord.",
+                "allowed_staff" : "951908174900899911",
+                "limit" : "5",
+                "id" : "951907269153525771"
             }
         ]
     }

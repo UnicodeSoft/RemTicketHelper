@@ -29,7 +29,7 @@ exports.run = (client, message, args) => {
         );
 
         const embed_content = [{
-            color: 0xcc3366,
+            color: emb.template.main_embed.color,
             title: emb.template.main_embed.title,
             description: emb.template.main_embed.description,
             footer: emb.footer

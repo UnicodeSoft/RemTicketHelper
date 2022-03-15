@@ -21,7 +21,7 @@ exports.run = async (client, message, args) => {
         const sec = config.bot.secDelTicket;
 
         const embed_delete = [{
-            color: 0xcc3366,
+            color: template.delete.color,
             title: template.delete.title,
             description: template.delete.description.replaceAll('{seconds}', sec),
             footer: footer

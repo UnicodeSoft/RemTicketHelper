@@ -32,7 +32,7 @@ module.exports = {
 
     getCurTicketId: function(guild, channel) {
         const query = sql.prepare(" SELECT ticket FROM tickets WHERE guild = ? AND channel = ? ");
-        return query.get(guild, channel).ticket.toString().padStart(5, '0');
+        return query.get(guild, channel).ticket.toString().padStart(4, '0');
     },
 
     getUserCreator: function(guild, channel) {

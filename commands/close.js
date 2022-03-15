@@ -6,9 +6,6 @@ const { isTicket, getUserCreator, updateToClosed, getCurTicketId, getTicketCateg
 // DiscordJs
 const { MessageActionRow, MessageButton } = require('discord.js');
 
-// This thing...
-const wait = require('node:timers/promises').setTimeout;
-
 exports.run = async (client, message, args) => {
     try {
         const guildId = message.guildId;
@@ -19,7 +16,7 @@ exports.run = async (client, message, args) => {
         }
 
         const embed_closed = [{
-            color: 0xcc3366,
+            color: template.closed.color,
             title: template.closed.title,
             description: template.closed.description.replaceAll('{prefix_mention}', config.bot.prefix),
             footer: footer

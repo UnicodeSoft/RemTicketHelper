@@ -19,7 +19,7 @@ exports.run = async (client, message, args) => {
         }
 
         const embed_reopen = [{
-            color: 0xcc3366,
+            color: template.reopened.color,
             title: template.reopened.title,
             description: template.reopened.description,
             footer: footer
