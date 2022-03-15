@@ -40,6 +40,23 @@ for(const prefixFile of prefixCommandFiles) {
 client.login(config.bot.token);
 
 // Handle Error ============================================================================================================
-process.on('unhandledRejection', error => {
-    console.error('[❌] Error: ', error);
+process.on('unhandledRejection', (reason, p) => {
+    console.error('[🦄] Unhandled Rejection/Catch');
+    console.error(reason, p);
+    console.error("\n\n");
+});
+process.on('uncaughtException', (err, origin) => {
+    console.error('[🦄] Uncaught Exception/Catch');
+    console.error(err, origin);
+    console.error("\n\n");
+});
+process.on('uncaughtExceptionMonitor', (err, origin) => {
+    console.error('[🦄] Uncaught Exception/Catch (MONITOR)');
+    console.error(err, origin);
+    console.error("\n\n");
+});
+process.on('multipleResolves', (type, promise, reason) => {
+    console.error('[🦄] Multiple Resolves');
+    console.error(type, promise, reason);
+    console.error("\n\n");
 });
