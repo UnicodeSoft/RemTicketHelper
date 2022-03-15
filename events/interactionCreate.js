@@ -27,7 +27,7 @@ module.exports = {
     async execute(int) {
         try {
 
-            await wait(750);
+            await wait(3000);
 
             // 📘 Datos Necesarios
             const guild = int.guildId;
