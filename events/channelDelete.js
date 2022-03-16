@@ -1,5 +1,5 @@
 // Custom functions 💜
-const { updateToDeleted } = require('../functions.js');
+const { updateToDeleted } = require('../functions/sqlite.js');
 
 module.exports = {
     name: 'channelDelete',
@@ -9,5 +9,7 @@ module.exports = {
         const channelId = channel.id;
 
         updateToDeleted(guildId, channelId);
+
+        console.log(`[🎫] Ticket Eliminado (Forced way) | ID: ${channel.name}`);
     }
 }

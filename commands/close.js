@@ -1,7 +1,7 @@
 // Data
 const config = require('../data/config.json');
 const { template, footer } = require('../data/embeds.json');
-const { isTicket, getUserCreator, updateToClosed, getCurTicketId, getTicketCategory } = require('../functions.js');
+const { isTicket, getUserCreator, updateToClosed, getTicketCategory } = require('../functions/sqlite.js');
 
 // DiscordJs
 const { MessageActionRow, MessageButton } = require('discord.js');
@@ -54,6 +54,7 @@ exports.run = async (client, message, args) => {
             channelEdit.edit({
                 permissionOverwrites: allowed_staff
             });
+            console.log(`[🎫] Ticket Cerrado | Categoria: ${category_info.name} | ID: ${channelEdit.name}`);
         });
     } catch(error) {
         console.error(error);

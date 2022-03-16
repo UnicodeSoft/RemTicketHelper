@@ -12,9 +12,8 @@ cli.once('ready', () => {});
 
 exports.run = (client, message, args) => {
     try {
-        cpuStat.usagePercent(function (e, percent, seconds) {
+        cpuStat.usagePercent(function (error, percent, seconds) {
             try {
-                if(e) { return console.log(e.stack); }
                 message.reply({ embeds: [{
                     color: 0x62d1f0,
                     title: '💻 Información del bot y estado del servidor',
@@ -29,8 +28,7 @@ exports.run = (client, message, args) => {
                     ],
                     thumbnail: embed.footer
                 }] });
-            } catch (e) {
-                console.log(e);
+            } catch (error) {
                 message.reply({ embeds: [{
                     color: 0x62d1f0,
                     title: '💻 Información del bot y estado del servidor',

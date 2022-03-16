@@ -1,7 +1,7 @@
 // Data
 const config = require('../data/config.json');
 const { template, footer } = require('../data/embeds.json');
-const { isTicket, updateToDeleted } = require('../functions.js');
+const { isTicket, updateToDeleted } = require('../functions/sqlite.js');
 
 // DiscordJs
 const { MessageActionRow, MessageButton } = require('discord.js');
@@ -35,6 +35,11 @@ exports.run = async (client, message, args) => {
         updateToDeleted(toDelete.guildId, toDelete.id);
 
         toDelete.delete();
+
+        var menu_id = getTicketCategory(guildId, channelId);
+        var category_info = Object.values(config.guilds[guild]).flat().find(r => r.id === menu_id);
+
+        console.log(`[🎫] Ticket Eliminado | Categoria: ${category_info.name} ID: ${toDelete.name}`);
     } catch(error) {
         console.error(error);
     }

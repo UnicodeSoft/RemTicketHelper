@@ -11,10 +11,9 @@ const {
     updateToDeleted,
     updateToClosed,
     updateToOpen,
-    getCurTicketId,
     getUserCreator,
     getTicketCategory
-} = require('../functions.js');
+} = require('../functions/sqlite.js');
 
 // DiscordJs
 const { MessageActionRow, MessageButton } = require('discord.js');
@@ -26,8 +25,6 @@ module.exports = {
     name: 'interactionCreate',
     async execute(int) {
         try {
-
-            await wait(3000);
 
             // 📘 Datos Necesarios
             const guild = int.guildId;
@@ -50,11 +47,12 @@ module.exports = {
 
                     await int.deferUpdate();
 
-                    await wait(500);
+                    await wait(750);
 
                     await int.editReply({ embeds: embed_content, ephemeral: true });
 
                     if(total_open >= category_info.limit) {
+                        console.log(`[🎫] Intento fallido de crear ticket | Categoria: ${category_info.name}`);
                         return await int.followUp({
                             content: "🎫 No se puede crear el ticket porque has alcanzado el límite de tickets abiertos en esta categoría...",
                             ephemeral: true
@@ -102,12 +100,11 @@ module.exports = {
                             footer: footer
                         }];
 
-                        const btns_ticket =  new MessageActionRow()
-                            .addComponents(
-                                new MessageButton().setCustomId('close').setLabel('Cerrar Ticket').setStyle('DANGER')
-                            );
+                        const btns_ticket = new MessageActionRow().addComponents( new MessageButton().setCustomId('close').setLabel('Cerrar Ticket').setStyle('DANGER') );
 
                         newChannel.send({ content: `Hola <@${user}>!`, embeds: embed_welcome, components: [ btns_ticket ] });
+
+                        console.log(`[🎫] Nuevo Ticket Creado | Categoria: ${category_info.name} | ID: ${newTicketId}`);
                     });
                 break;
                 /* ============================================================================================================================== */
@@ -162,6 +159,8 @@ module.exports = {
                                 channelEdit.edit({
                                     permissionOverwrites: allowed_staff
                                 });
+
+                                console.log(`[🎫] Ticket Cerrado | Categoria: ${category_info.name} | ID: ${channelEdit.name}`);
                             });
                             break;
                         /* ================================================================================================================= */
@@ -204,10 +203,14 @@ module.exports = {
                                 channelEdit.edit({
                                     permissionOverwrites: allowed_staff
                                 });
+
+                                console.log(`[🎫] Ticket Reabierto | Categoria: ${category_info.name} | ID: ${channelEdit.name}`);
                             });
                             break;
                         /* ================================================================================================================= */
                         case 'delete':
+                            var menu_id = getTicketCategory(guild, channel);
+                            var category_info = Object.values(config.guilds[guild]).flat().find(r => r.id === menu_id);
                             const sec = config.bot.secDelTicket;
 
                             const embed_delete = [{
@@ -225,6 +228,8 @@ module.exports = {
                             updateToDeleted(toDelete.guildId, toDelete.id);
 
                             toDelete.delete();
+
+                            console.log(`[🎫] Ticket Eliminado | Categoria: ${category_info.name} | ID: ${channelEdit.name}`);
                         break;
                     }
                 break;

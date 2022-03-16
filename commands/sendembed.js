@@ -36,6 +36,7 @@ exports.run = (client, message, args) => {
         }];
 
         message.channel.send({ embeds: embed_content, components: [row] });
+        console.log(`[🎫] Envío de embed interactivo`);
     } catch(error) {
         console.error(error);
     }
