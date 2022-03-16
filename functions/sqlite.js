@@ -1,5 +1,5 @@
 // Config
-const config = require('./data/config.json');
+const config = require('../data/config.json');
 
 // SQLite
 const SQLite = require('better-sqlite3');
