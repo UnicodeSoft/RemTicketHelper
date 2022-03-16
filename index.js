@@ -5,6 +5,10 @@ const config = require('./data/config.json');
 const fs = require('fs');
 const { Client, Collection, Intents } = require('discord.js');
 
+// Load Sentry Loggin resources ============================================================================================
+const Sentry = require("@sentry/node");
+Sentry.init({ dsn: "https://d3e05c16f8f0450bb8f3cc3752b7c390@o1168407.ingest.sentry.io/6260330", tracesSampleRate: 1.0 });
+
 // Define client Intents ===================================================================================================
 const client = new Client({
     partials: [ 'MESSAGE', 'REACTION', 'CHANNEL' ],
@@ -40,23 +44,24 @@ for(const prefixFile of prefixCommandFiles) {
 client.login(config.bot.token);
 
 // Handle Error ============================================================================================================
-process.on('unhandledRejection', (reason, p) => {
-    console.error('[🦄] Unhandled Rejection/Catch');
-    console.error(reason, p);
-    console.error("\n\n");
+process.on('unhandledRejection', (error) => {
+    Sentry.withScope(function(scope) {
+        scope.setTag('enviroment', 'prod');
+        scope.setTag('bot_project', 'remtickethelper');
+        scope.setTag('error_type', 'unhandledRejection');
+        scope.setTag('file', 'index.js');
+        scope.setLevel('error');
+        Sentry.captureException(error);
+    });
 });
-process.on('uncaughtException', (err, origin) => {
-    console.error('[🦄] Uncaught Exception/Catch');
-    console.error(err, origin);
-    console.error("\n\n");
-});
-process.on('uncaughtExceptionMonitor', (err, origin) => {
-    console.error('[🦄] Uncaught Exception/Catch (MONITOR)');
-    console.error(err, origin);
-    console.error("\n\n");
-});
-process.on('multipleResolves', (type, promise, reason) => {
-    console.error('[🦄] Multiple Resolves');
-    console.error(type, promise, reason);
-    console.error("\n\n");
+
+client.on('shardError', (error) => {
+    Sentry.withScope(function(scope) {
+        scope.setTag('enviroment', 'prod');
+        scope.setTag('bot_project', 'remtickethelper');
+        scope.setTag('error_type', 'shardError');
+        scope.setTag('file', 'index.js');
+        scope.setLevel('error');
+        Sentry.captureException(error);
+    });
 });
