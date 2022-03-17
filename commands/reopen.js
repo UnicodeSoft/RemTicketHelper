@@ -67,6 +67,7 @@ exports.run = async (client, message, args) => {
             console.log(`[🎫] Ticket Reabierto | Categoria: ${category_info.name} | ID: ${channelEdit.name}`);
         });
     } catch(error) {
+        console.error(error);
         Sentry.withScope(function(scope) {
             scope.setTag('enviroment', 'prod');
             scope.setTag('bot_project', 'remtickethelper');
@@ -75,6 +76,5 @@ exports.run = async (client, message, args) => {
             scope.setLevel('error');
             Sentry.captureException(error);
         });
-        console.error(error);
     }
 }

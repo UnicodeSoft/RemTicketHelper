@@ -29,7 +29,6 @@ module.exports = {
     name: 'interactionCreate',
     async execute(int) {
         try {
-
             // 📘 Datos Necesarios
             const guild = int.guildId;
             const channel = int.channelId;
@@ -104,7 +103,7 @@ module.exports = {
                             footer: footer
                         }];
 
-                        const btns_ticket = new MessageActionRow().addComponents( new MessageButton().setCustomId('close').setLabel('Cerrar Ticket').setStyle('DANGER') );
+                        const btns_ticket = new MessageActionRow().addComponents( new MessageButton().setCustomId(`${newChannel.id}-close`).setLabel('Cerrar Ticket').setStyle('DANGER') );
 
                         newChannel.send({ content: `Hola <@${user}>!`, embeds: embed_welcome, components: [ btns_ticket ] });
 
@@ -115,11 +114,14 @@ module.exports = {
                 case 'BUTTON': // Botones de accion (para gestionar el ticket)
                     const button_id = int.customId;
 
+                    const explode = button_id.split('-');
+                    const action = explode[1];
+
                     if(!isTicket(channel, guild)) {
                         return;
                     }
 
-                    switch(button_id) {
+                    switch(action) {
                         case 'close':
                             const embed_closed = [{
                                 color: template.closed.color,
@@ -130,8 +132,8 @@ module.exports = {
 
                             const btns_ticket_closed =  new MessageActionRow()
                                 .addComponents(
-                                    new MessageButton().setCustomId('reopen').setLabel('Reabrir Ticket').setStyle('SUCCESS'),
-                                    new MessageButton().setCustomId('delete').setLabel('Eliminar Ticket').setStyle('DANGER')
+                                    new MessageButton().setCustomId(`${channel}-reopen`).setLabel('Reabrir Ticket').setStyle('SUCCESS'),
+                                    new MessageButton().setCustomId(`${channel}-delete`).setLabel('Eliminar Ticket').setStyle('DANGER')
                                 );
                             int.reply({ embeds: embed_closed, components: [ btns_ticket_closed ] });
 
@@ -178,7 +180,7 @@ module.exports = {
 
                             const btns_ticket_reopen =  new MessageActionRow()
                                 .addComponents(
-                                    new MessageButton().setCustomId('close').setLabel('Cerrar Ticket').setStyle('DANGER')
+                                    new MessageButton().setCustomId(`${channel}-close`).setLabel('Cerrar Ticket').setStyle('DANGER')
                                 );
                             int.reply({ embeds: embed_reopen, components: [ btns_ticket_reopen ] });
 
@@ -213,8 +215,6 @@ module.exports = {
                             break;
                         /* ================================================================================================================= */
                         case 'delete':
-                            var menu_id = getTicketCategory(guild, channel);
-                            var category_info = Object.values(config.guilds[guild]).flat().find(r => r.id === menu_id);
                             const sec = config.bot.secDelTicket;
 
                             const embed_delete = [{
@@ -223,6 +223,7 @@ module.exports = {
                                 description: template.delete.description.replaceAll('{seconds}', sec),
                                 footer: footer
                             }];
+
                             int.reply({ embeds: embed_delete });
 
                             await wait(sec * 1000);
@@ -232,22 +233,21 @@ module.exports = {
                             updateToDeleted(toDelete.guildId, toDelete.id);
 
                             toDelete.delete();
-
-                            console.log(`[🎫] Ticket Eliminado | Categoria: ${category_info.name} | ID: ${channelEdit.name}`);
                         break;
                     }
                 break;
             }
+
         } catch (error) {
+            console.error(error);
             Sentry.withScope(function(scope) {
                 scope.setTag('enviroment', 'prod');
                 scope.setTag('bot_project', 'remtickethelper');
-                scope.setTag('error_type', 'try_catch');
-                scope.setTag('file', 'interactionCreate.js');
+                scope.setTag('error_type', 'errorHandler');
+                scope.setTag('file', 'error.js');
                 scope.setLevel('error');
                 Sentry.captureException(error);
             });
-            console.error(error);
         }
     }
 };

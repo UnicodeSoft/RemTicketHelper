@@ -45,6 +45,7 @@ client.login(config.bot.token);
 
 // Handle Error ============================================================================================================
 process.on('unhandledRejection', (error) => {
+    console.error(error);
     Sentry.withScope(function(scope) {
         scope.setTag('enviroment', 'prod');
         scope.setTag('bot_project', 'remtickethelper');
@@ -56,6 +57,7 @@ process.on('unhandledRejection', (error) => {
 });
 
 client.on('shardError', (error) => {
+    console.error(error);
     Sentry.withScope(function(scope) {
         scope.setTag('enviroment', 'prod');
         scope.setTag('bot_project', 'remtickethelper');

@@ -91,6 +91,7 @@ exports.run = (client, message, args) => {
             }
         }
     } catch(error) {
+        console.error(error);
         Sentry.withScope(function(scope) {
             scope.setTag('enviroment', 'prod');
             scope.setTag('bot_project', 'remtickethelper');
@@ -99,6 +100,5 @@ exports.run = (client, message, args) => {
             scope.setLevel('error');
             Sentry.captureException(error);
         });
-        console.error(error);
     }
 }

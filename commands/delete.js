@@ -3,7 +3,7 @@ const config = require('../data/config.json');
 const { template, footer } = require('../data/embeds.json');
 
 // Internal functions
-const { isTicket, updateToDeleted } = require('../functions/sqlite.js');
+const { isTicket, updateToDeleted, getTicketCategory } = require('../functions/sqlite.js');
 
 // Load Sentry Loggin resources
 const Sentry = require("@sentry/node");
@@ -37,13 +37,14 @@ exports.run = async (client, message, args) => {
 
         updateToDeleted(toDelete.guildId, toDelete.id);
 
-        toDelete.delete();
-
         var menu_id = getTicketCategory(guildId, channelId);
-        var category_info = Object.values(config.guilds[guild]).flat().find(r => r.id === menu_id);
+        var category_info = Object.values(config.guilds[guildId]).flat().find(r => r.id === menu_id);
 
         console.log(`[🎫] Ticket Eliminado | Categoria: ${category_info.name} ID: ${toDelete.name}`);
+
+        toDelete.delete();
     } catch(error) {
+        console.error(error);
         Sentry.withScope(function(scope) {
             scope.setTag('enviroment', 'prod');
             scope.setTag('bot_project', 'remtickethelper');
@@ -52,6 +53,5 @@ exports.run = async (client, message, args) => {
             scope.setLevel('error');
             Sentry.captureException(error);
         });
-        console.error(error);
     }
 }
