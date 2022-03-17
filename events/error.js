@@ -1,3 +1,6 @@
+// Data
+const config = require('../data/config.json');
+
 // Load Sentry Loggin resources
 const Sentry = require("@sentry/node");
 Sentry.init({ dsn: config.sentry.dsn, tracesSampleRate: 1.0 });
