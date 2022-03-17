@@ -4,7 +4,7 @@ const emb = require('../data/embeds.json');
 
 // Load Sentry Loggin resources
 const Sentry = require("@sentry/node");
-Sentry.init({ dsn: "https://d3e05c16f8f0450bb8f3cc3752b7c390@o1168407.ingest.sentry.io/6260330", tracesSampleRate: 1.0 });
+Sentry.init({ dsn: config.sentry.dsn, tracesSampleRate: 1.0 });
 
 exports.run = (client, message, args) => {
     try {

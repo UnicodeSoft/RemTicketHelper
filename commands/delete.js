@@ -1,16 +1,15 @@
 // Data
 const config = require('../data/config.json');
 const { template, footer } = require('../data/embeds.json');
+
+// Internal functions
 const { isTicket, updateToDeleted } = require('../functions/sqlite.js');
 
 // Load Sentry Loggin resources
 const Sentry = require("@sentry/node");
-Sentry.init({ dsn: "https://d3e05c16f8f0450bb8f3cc3752b7c390@o1168407.ingest.sentry.io/6260330", tracesSampleRate: 1.0 });
+Sentry.init({ dsn: config.sentry.dsn, tracesSampleRate: 1.0 });
 
-// DiscordJs
-const { MessageActionRow, MessageButton } = require('discord.js');
-
-// This thing...
+// Other Dependencies
 const wait = require('node:timers/promises').setTimeout;
 
 exports.run = async (client, message, args) => {
