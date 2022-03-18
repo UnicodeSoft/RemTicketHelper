@@ -27,7 +27,6 @@ for(const file of events) {
     const eventName = file.split('.')[0];
     const event = require(`./events/${file}`);
     client.on(event.name, (...args) => event.execute(...args));
-    console.log(`[🔌] Evento cargado:  ${eventName}`);
 }
 
 // Comandos para gestión de tickets creados (y comandos utilitarios) =======================================================
@@ -37,7 +36,6 @@ for(const prefixFile of prefixCommandFiles) {
     var commandName = prefixFile.split(".")[0];
     var command = require(`./commands/${prefixFile}`);
     client.commandsPrefix.set(commandName, command);
-    console.log(`[🔌] Recurso de comando cargado: ${commandName}`);
 }
 
 // Define token a init bot =================================================================================================
@@ -45,25 +43,25 @@ client.login(config.bot.token);
 
 // Handle Error ============================================================================================================
 process.on('unhandledRejection', (error) => {
-    console.error(error);
     Sentry.withScope(function(scope) {
-        scope.setTag('enviroment', 'prod');
+        scope.setTag('enviroment', 'production');
         scope.setTag('bot_project', 'remtickethelper');
         scope.setTag('error_type', 'unhandledRejection');
         scope.setTag('file', 'index.js');
         scope.setLevel('error');
         Sentry.captureException(error);
     });
+    console.error(error);
 });
 
 client.on('shardError', (error) => {
-    console.error(error);
     Sentry.withScope(function(scope) {
-        scope.setTag('enviroment', 'prod');
+        scope.setTag('enviroment', 'production');
         scope.setTag('bot_project', 'remtickethelper');
         scope.setTag('error_type', 'shardError');
         scope.setTag('file', 'index.js');
         scope.setLevel('error');
         Sentry.captureException(error);
     });
+    console.error(error);
 });

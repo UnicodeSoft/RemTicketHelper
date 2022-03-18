@@ -9,7 +9,7 @@ module.exports = {
     name: 'error',
     async execute(error) {
         Sentry.withScope(function(scope) {
-            scope.setTag('enviroment', 'prod');
+            scope.setTag('enviroment', 'production');
             scope.setTag('bot_project', 'remtickethelper');
             scope.setTag('error_type', 'errorHandler');
             scope.setTag('file', 'error.js');

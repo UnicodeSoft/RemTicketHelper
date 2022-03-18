@@ -239,15 +239,15 @@ module.exports = {
             }
 
         } catch (error) {
-            console.error(error);
             Sentry.withScope(function(scope) {
-                scope.setTag('enviroment', 'prod');
+                scope.setTag('enviroment', 'production');
                 scope.setTag('bot_project', 'remtickethelper');
                 scope.setTag('error_type', 'errorHandler');
-                scope.setTag('file', 'error.js');
+                scope.setTag('file', 'interactionCreate.js');
                 scope.setLevel('error');
                 Sentry.captureException(error);
             });
+            console.error(error);
         }
     }
 };

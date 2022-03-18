@@ -23,7 +23,7 @@ exports.run = (client, message, args) => {
         message.channel.send({ embeds: embed_content });
     } catch(error) {
         Sentry.withScope(function(scope) {
-            scope.setTag('enviroment', 'prod');
+            scope.setTag('enviroment', 'production');
             scope.setTag('bot_project', 'remtickethelper');
             scope.setTag('error_type', 'try_catch');
             scope.setTag('file', 'about.js');
