@@ -7,12 +7,11 @@ module.exports = {
         max_restarts : 10,
 
         ignore_watch : [
-            './data/db.sqlite',
-            './logs/errors.log',
-            './logs/out.log'
+            'data/',
+            'logs/'
         ],
 
-        log_date_format : 'YYYY-MM-DD HH:mm',
+        log_date_format : 'YYYY-MM-DD HH:mm:ss',
         error_file : './logs/errors.log',
         out_file   : './logs/out.log'
     }]

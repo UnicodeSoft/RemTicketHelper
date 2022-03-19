@@ -158,7 +158,6 @@ module.exports = {
                                         { id: int.member.guild.roles.everyone.id, deny: [ 'VIEW_CHANNEL', 'READ_MESSAGE_HISTORY' ] },
                                         { id: int.guild.members.cache.get(userCreator), deny: [ 'VIEW_CHANNEL', 'READ_MESSAGE_HISTORY', 'SEND_MESSAGES' ] },
                                         { id: int.guild.members.cache.get(config.bot.clientId), allow: [ 'VIEW_CHANNEL', 'READ_MESSAGE_HISTORY', 'SEND_MESSAGES', 'MANAGE_CHANNELS', 'MANAGE_MESSAGES' ] }
-
                                     ];
                                 }
 
@@ -197,12 +196,14 @@ module.exports = {
                                     var allowed_staff = [
                                         { id: int.member.guild.roles.everyone.id, deny: [ 'VIEW_CHANNEL', 'READ_MESSAGE_HISTORY' ] },
                                         { id: int.guild.members.cache.get(userCreator), allow: [ 'VIEW_CHANNEL', 'READ_MESSAGE_HISTORY', 'SEND_MESSAGES' ] },
-                                        { id: category_info.allowed_staff, allow: [ 'VIEW_CHANNEL', 'READ_MESSAGE_HISTORY', 'SEND_MESSAGES' ] }
+                                        { id: category_info.allowed_staff, allow: [ 'VIEW_CHANNEL', 'READ_MESSAGE_HISTORY', 'SEND_MESSAGES' ] },
+                                        { id: int.guild.members.cache.get(config.bot.clientId), allow: [ 'VIEW_CHANNEL', 'READ_MESSAGE_HISTORY', 'SEND_MESSAGES', 'MANAGE_CHANNELS', 'MANAGE_MESSAGES' ] }
                                     ];
                                 } else {
                                     var allowed_staff = [
                                         { id: int.member.guild.roles.everyone.id, deny: [ 'VIEW_CHANNEL', 'READ_MESSAGE_HISTORY' ] },
-                                        { id: int.guild.members.cache.get(userCreator), allow: [ 'VIEW_CHANNEL', 'READ_MESSAGE_HISTORY', 'SEND_MESSAGES' ] }
+                                        { id: int.guild.members.cache.get(userCreator), allow: [ 'VIEW_CHANNEL', 'READ_MESSAGE_HISTORY', 'SEND_MESSAGES' ] },
+                                        { id: int.guild.members.cache.get(config.bot.clientId), allow: [ 'VIEW_CHANNEL', 'READ_MESSAGE_HISTORY', 'SEND_MESSAGES', 'MANAGE_CHANNELS', 'MANAGE_MESSAGES' ] }
                                     ];
                                 }
 
