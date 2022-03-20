@@ -3,7 +3,7 @@
 Sistema de tickets de soporte para discord
 ```
 
-### 🧰 Recursos Utilizados
+### 🧰 Dependencias Utilizadas
 ```
 - NodeJS
 - DiscordJS
@@ -12,13 +12,13 @@ Sistema de tickets de soporte para discord
 
 ### 📋 Como Instalar
 ```js
-npm install // Para descargar todas las dependencias
-npm update  // Para mantener actualizdo las dependencias
+npm install
+npm update
 ```
 
 ### 📋 PM2
 ```
-pm2 start index.js --name "Nombre del bot"
+pm2 start
 ```
 
 ### 💻 Sistema MultiGuilds
@@ -28,12 +28,10 @@ El VPS que base para los bots cuenta con `1Gb RAM / 25Gb SSD NVMe / 1vCPU`, actu
 
 
 ### 📚 Comandos Disponibles
-```
-$rt about : Acerca del proyecto
-$rt info  : Ver estado del bot
+`$rt about` : Acerca del proyecto
+`$rt info`  : Ver estado del bot
 
-$rt sendembed : Enviar mensaje con el menú de tickets
-$rt delete : Borrar un ticket de soporte
-$rt close  : Cerrar un ticket
-$rt reopen : Reabrir un ticket cerrado
-```
+`$rt sendembed` : Enviar mensaje con el menú de tickets
+`$rt delete` : Borrar un ticket de soporte
+`$rt close`  : Cerrar un ticket
+`$rt reopen` : Reabrir un ticket cerrado
