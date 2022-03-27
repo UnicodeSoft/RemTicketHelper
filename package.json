@@ -17,7 +17,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/UnicodeSoft/RemTicketHelper.git"
+    "url": "git+https://github.com/UnicodeSoft/RemTicketHelper_v1.git"
   },
   "keywords": [
     "tickettool",
@@ -30,7 +30,7 @@
   "author": "KuroNeko",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/UnicodeSoft/RemTicketHelper/issues"
+    "url": "https://github.com/UnicodeSoft/RemTicketHelper_v1/issues"
   },
-  "homepage": "https://github.com/UnicodeSoft/RemTicketHelper#readme"
+  "homepage": "https://github.com/UnicodeSoft/RemTicketHelper_v1#readme"
 }
