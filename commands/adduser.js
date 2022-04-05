@@ -9,9 +9,6 @@ const { isTicket, getUserCreator, updateToOpen, getTicketCategory } = require('.
 const Sentry = require("@sentry/node");
 Sentry.init({ dsn: config.sentry.dsn, tracesSampleRate: 1.0 });
 
-// DiscordJs
-const { MessageActionRow, MessageButton } = require('discord.js');
-
 // Other Dependencies
 const wait = require('node:timers/promises').setTimeout;
 
@@ -24,17 +21,13 @@ exports.run = async (client, message, args) => {
             return;
         }
 
-        const embed_reopen = [{
+        const embed_user_added = [{
             color: template.reopened.color,
             title: template.reopened.title,
             description: template.reopened.description
         }];
 
-        const btns_ticket_reopen =  new MessageActionRow()
-            .addComponents(
-                new MessageButton().setCustomId('close').setLabel('Cerrar Ticket').setStyle('DANGER')
-            );
-        message.reply({ embeds: embed_reopen, components: [ btns_ticket_reopen ] });
+        message.reply({ embeds: embed_user_added });
 
         updateToOpen(guildId, channelId);
 

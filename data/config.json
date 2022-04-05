@@ -1,8 +1,8 @@
 {
     "bot" : {
-        "clientId"     : "947989886026280990",
-        "token"        : "OTQ3OTg5ODg2MDI2MjgwOTkw.Yh1SYQ.f0PGQQEZ8uZqXF25kF7-sYkcfks",
-        "prefix"       : "$rt",
+        "clientId"     : "960889806932570153",
+        "token"        : "OTYwODg5ODA2OTMyNTcwMTUz.YkxAXg.Gbejp7M_Yvth0pktW-AMbSAO8o8",
+        "prefix"       : "$nodejs",
         "ownerId"      : "377052236909379585",
         "timezone"     : "America/Asuncion",
         "secDelTicket" : "10"
@@ -18,7 +18,9 @@
                 "emoji" : { "id" : "943216385281101944", "name" : "unicode"},
                 "name" : "Soporte General",
                 "desc" : "Para consultas que no califiquen en cualquier categoría.",
-                "allowed_staff" : "949842940140847104",
+                "allowed_staff" : [
+                    "793908257672265802"
+                ],
                 "limit" : "5",
                 "id" : "951906944812187709"
             },
@@ -26,7 +28,9 @@
                 "emoji" : { "id" : "823670493910663228", "name" : "whitelistme"},
                 "name" : "WhitelistMe",
                 "desc" : "Consultas y solicitudes sobre a la plataforma.",
-                "allowed_staff" : "951908166759776328",
+                "allowed_staff" : [
+                    "793908257672265802"
+                ],
                 "limit" : "5",
                 "id" : "951907069202677880"
             },
@@ -34,7 +38,9 @@
                 "emoji" : { "id" : "818254431346884608", "name" : "bootstrap"},
                 "name" : "Diseño/Desarrollo Web",
                 "desc" : "Consultas y solicitudes de diseño y desarrollo web.",
-                "allowed_staff" : "951908172875038741",
+                "allowed_staff" : [
+                    "793908257672265802"
+                ],
                 "limit" : "5",
                 "id" : "951907232914767913"
             },
@@ -42,7 +48,9 @@
                 "emoji" : { "id" : "818254431844827158", "name" : "nodejs"},
                 "name" : "Desarrollo de Bots",
                 "desc" : "Consultas y solicitudes de desarrollo de bots para Discord.",
-                "allowed_staff" : "951908174900899911",
+                "allowed_staff" : [
+                    "793908257672265802"
+                ],
                 "limit" : "5",
                 "id" : "951907269153525771"
             }

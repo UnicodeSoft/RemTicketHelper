@@ -1,6 +1,6 @@
 // Data
 const config = require('../data/config.json');
-const { template, footer } = require('../data/embeds.json');
+const { template } = require('../data/embeds.json');
 
 // Internal functions
 const { isTicket, updateToDeleted, getTicketCategory } = require('../functions/sqlite.js');
@@ -27,7 +27,6 @@ exports.run = async (client, message, args) => {
             color: template.delete.color,
             title: template.delete.title,
             description: template.delete.description.replaceAll('{seconds}', sec),
-            footer: footer
         }];
         message.reply({ embeds: embed_delete });
 

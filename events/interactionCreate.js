@@ -66,19 +66,16 @@ module.exports = {
                         ephemeral: true
                     });
 
+                    var permissions = [
+                        { id: int.member.guild.roles.everyone.id, deny: [ 'VIEW_CHANNEL', 'READ_MESSAGE_HISTORY' ] },
+                        { id: config.bot.clientId, allow: [ 'VIEW_CHANNEL', 'READ_MESSAGE_HISTORY', 'SEND_MESSAGES', 'MANAGE_CHANNELS', 'MANAGE_MESSAGES' ] },
+                        { id: user, allow: [ 'VIEW_CHANNEL', 'READ_MESSAGE_HISTORY', 'SEND_MESSAGES' ] }
+                    ];
+
                     if(category_info.allowed_staff.length > 0) {
-                        var allowed_staff = [
-                            { id: int.member.guild.roles.everyone.id, deny: [ 'VIEW_CHANNEL', 'READ_MESSAGE_HISTORY' ] },
-                            { id: int.guild.members.cache.get(user), allow: [ 'VIEW_CHANNEL', 'READ_MESSAGE_HISTORY', 'SEND_MESSAGES' ] },
-                            { id: int.guild.members.cache.get(config.bot.clientId), allow: [ 'VIEW_CHANNEL', 'READ_MESSAGE_HISTORY', 'SEND_MESSAGES', 'MANAGE_CHANNELS', 'MANAGE_MESSAGES' ] },
-                            { id: category_info.allowed_staff, allow: [ 'VIEW_CHANNEL', 'READ_MESSAGE_HISTORY', 'SEND_MESSAGES' ] }
-                        ];
-                    } else {
-                        var allowed_staff = [
-                            { id: int.member.guild.roles.everyone.id, deny: [ 'VIEW_CHANNEL', 'READ_MESSAGE_HISTORY' ] },
-                            { id: int.guild.members.cache.get(user), allow: [ 'VIEW_CHANNEL', 'READ_MESSAGE_HISTORY', 'SEND_MESSAGES' ] },
-                            { id: int.guild.members.cache.get(config.bot.clientId), allow: [ 'VIEW_CHANNEL', 'READ_MESSAGE_HISTORY', 'SEND_MESSAGES', 'MANAGE_CHANNELS', 'MANAGE_MESSAGES' ] }
-                        ];
+                        category_info.allowed_staff.forEach(staff => {
+                            permissions.push({ id: staff, allow: [ 'VIEW_CHANNEL', 'READ_MESSAGE_HISTORY', 'SEND_MESSAGES' ] });
+                        });
                     }
 
                     const newTicketId = getNewTicketId(guild, menu_id);
@@ -86,7 +83,7 @@ module.exports = {
                     int.guild.channels.create(`ticket-${newTicketId}`, {
                         type: 'text',
                         parent: category_info.id,
-                        permissionOverwrites: allowed_staff
+                        permissionOverwrites: permissions
                     }).then((newChannel) => {
                         saveNewTicket(guild, category_info.id, newChannel.id, user);
 
@@ -107,6 +104,8 @@ module.exports = {
                         newChannel.send({ content: `Hola <@${user}>!`, embeds: embed_welcome, components: [ btns_ticket ] });
 
                         console.log(`[🎫] Nuevo Ticket Creado | Categoria: ${category_info.name} | ID: ${newTicketId}`);
+                    }).catch((error) => {
+                        console.log(error);
                     });
                 break;
                 /* ============================================================================================================================== */
@@ -144,24 +143,22 @@ module.exports = {
                                 var menu_id = getTicketCategory(guild, channel);
                                 var category_info = Object.values(config.guilds[guild]).flat().find(r => r.id === menu_id);
 
+                                var permissions = [
+                                    { id: int.member.guild.roles.everyone.id, deny: [ 'VIEW_CHANNEL', 'READ_MESSAGE_HISTORY' ] },
+                                    { id: config.bot.clientId, allow: [ 'VIEW_CHANNEL', 'READ_MESSAGE_HISTORY', 'SEND_MESSAGES', 'MANAGE_CHANNELS', 'MANAGE_MESSAGES' ] },
+                                    { id: userCreator, deny: [ 'VIEW_CHANNEL', 'READ_MESSAGE_HISTORY', 'SEND_MESSAGES' ] }
+                                ];
+
                                 if(category_info.allowed_staff.length > 0) {
-                                    var allowed_staff = [
-                                        { id: int.member.guild.roles.everyone.id, deny: [ 'VIEW_CHANNEL', 'READ_MESSAGE_HISTORY' ] },
-                                        { id: int.guild.members.cache.get(userCreator), deny: [ 'VIEW_CHANNEL', 'READ_MESSAGE_HISTORY', 'SEND_MESSAGES' ] },
-                                        { id: int.guild.members.cache.get(config.bot.clientId), allow: [ 'VIEW_CHANNEL', 'READ_MESSAGE_HISTORY', 'SEND_MESSAGES', 'MANAGE_CHANNELS', 'MANAGE_MESSAGES' ] },
-                                        { id: category_info.allowed_staff, allow: [ 'VIEW_CHANNEL', 'READ_MESSAGE_HISTORY', 'SEND_MESSAGES' ] }
-                                    ];
-                                } else {
-                                    var allowed_staff = [
-                                        { id: int.member.guild.roles.everyone.id, deny: [ 'VIEW_CHANNEL', 'READ_MESSAGE_HISTORY' ] },
-                                        { id: int.guild.members.cache.get(userCreator), deny: [ 'VIEW_CHANNEL', 'READ_MESSAGE_HISTORY', 'SEND_MESSAGES' ] },
-                                        { id: int.guild.members.cache.get(config.bot.clientId), allow: [ 'VIEW_CHANNEL', 'READ_MESSAGE_HISTORY', 'SEND_MESSAGES', 'MANAGE_CHANNELS', 'MANAGE_MESSAGES' ] }
-                                    ];
+                                    category_info.allowed_staff.forEach(staff => {
+                                        permissions.push({ id: staff, allow: [ 'VIEW_CHANNEL', 'READ_MESSAGE_HISTORY', 'SEND_MESSAGES' ] });
+                                    });
                                 }
 
                                 channelEdit.edit({
-                                    permissionOverwrites: allowed_staff
+                                    permissionOverwrites: permissions
                                 });
+
 
                                 console.log(`[🎫] Ticket Cerrado | Categoria: ${category_info.name} | ID: ${channelEdit.name}`);
                             });
@@ -189,23 +186,20 @@ module.exports = {
                                 var menu_id = getTicketCategory(guild, channel);
                                 var category_info = Object.values(config.guilds[guild]).flat().find(r => r.id === menu_id);
 
+                                var permissions = [
+                                    { id: int.member.guild.roles.everyone.id, deny: [ 'VIEW_CHANNEL', 'READ_MESSAGE_HISTORY' ] },
+                                    { id: config.bot.clientId, allow: [ 'VIEW_CHANNEL', 'READ_MESSAGE_HISTORY', 'SEND_MESSAGES', 'MANAGE_CHANNELS', 'MANAGE_MESSAGES' ] },
+                                    { id: userCreator, allow: [ 'VIEW_CHANNEL', 'READ_MESSAGE_HISTORY', 'SEND_MESSAGES' ] }
+                                ];
+
                                 if(category_info.allowed_staff.length > 0) {
-                                    var allowed_staff = [
-                                        { id: int.member.guild.roles.everyone.id, deny: [ 'VIEW_CHANNEL', 'READ_MESSAGE_HISTORY' ] },
-                                        { id: int.guild.members.cache.get(userCreator), allow: [ 'VIEW_CHANNEL', 'READ_MESSAGE_HISTORY', 'SEND_MESSAGES' ] },
-                                        { id: category_info.allowed_staff, allow: [ 'VIEW_CHANNEL', 'READ_MESSAGE_HISTORY', 'SEND_MESSAGES' ] },
-                                        { id: int.guild.members.cache.get(config.bot.clientId), allow: [ 'VIEW_CHANNEL', 'READ_MESSAGE_HISTORY', 'SEND_MESSAGES', 'MANAGE_CHANNELS', 'MANAGE_MESSAGES' ] }
-                                    ];
-                                } else {
-                                    var allowed_staff = [
-                                        { id: int.member.guild.roles.everyone.id, deny: [ 'VIEW_CHANNEL', 'READ_MESSAGE_HISTORY' ] },
-                                        { id: int.guild.members.cache.get(userCreator), allow: [ 'VIEW_CHANNEL', 'READ_MESSAGE_HISTORY', 'SEND_MESSAGES' ] },
-                                        { id: int.guild.members.cache.get(config.bot.clientId), allow: [ 'VIEW_CHANNEL', 'READ_MESSAGE_HISTORY', 'SEND_MESSAGES', 'MANAGE_CHANNELS', 'MANAGE_MESSAGES' ] }
-                                    ];
+                                    category_info.allowed_staff.forEach(staff => {
+                                        permissions.push({ id: staff, allow: [ 'VIEW_CHANNEL', 'READ_MESSAGE_HISTORY', 'SEND_MESSAGES' ] });
+                                    });
                                 }
 
                                 channelEdit.edit({
-                                    permissionOverwrites: allowed_staff
+                                    permissionOverwrites: permissions
                                 });
 
                                 console.log(`[🎫] Ticket Reabierto | Categoria: ${category_info.name} | ID: ${channelEdit.name}`);

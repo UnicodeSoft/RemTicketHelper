@@ -1,6 +1,6 @@
 // Data
 const config = require('../data/config.json');
-const { template, footer } = require('../data/embeds.json');
+const { template } = require('../data/embeds.json');
 
 // Internal functions
 const { isTicket, getUserCreator, updateToClosed, getTicketCategory } = require('../functions/sqlite.js');
@@ -24,8 +24,7 @@ exports.run = async (client, message, args) => {
         const embed_closed = [{
             color: template.closed.color,
             title: template.closed.title,
-            description: template.closed.description.replaceAll('{prefix_mention}', config.bot.prefix),
-            footer: footer
+            description: template.closed.description.replaceAll('{prefix_mention}', config.bot.prefix)
         }];
 
         const btns_ticket_closed =  new MessageActionRow()
@@ -42,19 +41,17 @@ exports.run = async (client, message, args) => {
             var menu_id = getTicketCategory(guildId, channelId);
             var category_info = Object.values(config.guilds[guildId]).flat().find(r => r.id === menu_id);
 
+
+            var permissions = [
+                { id: message.guild.roles.everyone.id, deny: [ 'VIEW_CHANNEL', 'READ_MESSAGE_HISTORY' ] },
+                { id: config.bot.clientId, allow: [ 'VIEW_CHANNEL', 'READ_MESSAGE_HISTORY', 'SEND_MESSAGES', 'MANAGE_CHANNELS', 'MANAGE_MESSAGES' ] },
+                { id: userCreator, deny: [ 'VIEW_CHANNEL', 'READ_MESSAGE_HISTORY', 'SEND_MESSAGES' ] }
+            ];
+
             if(category_info.allowed_staff.length > 0) {
-                var allowed_staff = [
-                    { id: message.guild.roles.everyone.id, deny: [ 'VIEW_CHANNEL', 'READ_MESSAGE_HISTORY' ] },
-                    { id: message.guild.members.cache.get(userCreator), deny: [ 'VIEW_CHANNEL', 'READ_MESSAGE_HISTORY', 'SEND_MESSAGES' ] },
-                    { id: category_info.allowed_staff, allow: [ 'VIEW_CHANNEL', 'READ_MESSAGE_HISTORY', 'SEND_MESSAGES' ] },
-                    { id: message.guild.members.cache.get(config.bot.clientId), allow: [ 'VIEW_CHANNEL', 'READ_MESSAGE_HISTORY', 'SEND_MESSAGES', 'MANAGE_CHANNELS', 'MANAGE_MESSAGES' ] }
-                ];
-            } else {
-                var allowed_staff = [
-                    { id: message.guild.roles.everyone.id, deny: [ 'VIEW_CHANNEL', 'READ_MESSAGE_HISTORY' ] },
-                    { id: message.guild.members.cache.get(userCreator), deny: [ 'VIEW_CHANNEL', 'READ_MESSAGE_HISTORY', 'SEND_MESSAGES' ] },
-                    { id: message.guild.members.cache.get(config.bot.clientId), allow: [ 'VIEW_CHANNEL', 'READ_MESSAGE_HISTORY', 'SEND_MESSAGES', 'MANAGE_CHANNELS', 'MANAGE_MESSAGES' ] }
-                ];
+                category_info.allowed_staff.forEach(staff => {
+                    permissions.push({ id: staff, allow: [ 'VIEW_CHANNEL', 'READ_MESSAGE_HISTORY', 'SEND_MESSAGES' ] });
+                });
             }
 
             channelEdit.edit({
