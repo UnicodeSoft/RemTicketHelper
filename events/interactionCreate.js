@@ -44,8 +44,7 @@ module.exports = {
                     const embed_content = [{
                         color: template.main_embed.color,
                         title: template.main_embed.title,
-                        description: template.main_embed.description,
-                        footer: footer
+                        description: template.main_embed.description
                     }];
 
                     await int.deferUpdate();
@@ -126,8 +125,7 @@ module.exports = {
                             const embed_closed = [{
                                 color: template.closed.color,
                                 title: template.closed.title,
-                                description: template.closed.description.replaceAll('{prefix_mention}', config.bot.prefix),
-                                footer: footer
+                                description: template.closed.description.replaceAll('{prefix_mention}', config.bot.prefix)
                             }];
 
                             const btns_ticket_closed =  new MessageActionRow()
@@ -173,8 +171,7 @@ module.exports = {
                             const embed_reopen = [{
                                 color: template.reopened.color,
                                 title: template.reopened.title,
-                                description: template.reopened.description,
-                                footer: footer
+                                description: template.reopened.description
                             }];
 
                             const btns_ticket_reopen =  new MessageActionRow()
@@ -221,8 +218,7 @@ module.exports = {
                             const embed_delete = [{
                                 color: template.delete.color,
                                 title: template.delete.title,
-                                description: template.delete.description.replaceAll('{seconds}', sec),
-                                footer: footer
+                                description: template.delete.description.replaceAll('{seconds}', sec)
                             }];
 
                             int.reply({ embeds: embed_delete });
