@@ -29,7 +29,8 @@
                 "name" : "WhitelistMe",
                 "desc" : "Consultas y solicitudes sobre a la plataforma.",
                 "allowed_staff" : [
-                    "793908257672265802"
+                    "793908257672265802",
+                    "952013631774674954"
                 ],
                 "limit" : "5",
                 "id" : "951907069202677880"

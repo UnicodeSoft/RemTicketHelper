@@ -9,52 +9,59 @@ const { isTicket, getUserCreator, updateToOpen, getTicketCategory } = require('.
 const Sentry = require("@sentry/node");
 Sentry.init({ dsn: config.sentry.dsn, tracesSampleRate: 1.0 });
 
-// Other Dependencies
-const wait = require('node:timers/promises').setTimeout;
-
 exports.run = async (client, message, args) => {
     try {
         const guildId = message.guildId;
         const channelId = message.channelId;
+        const categoryId = getTicketCategory(guildId, channelId);
 
         if(!isTicket(channelId, guildId)) {
             return;
         }
 
-        const embed_user_added = [{
-            color: template.reopened.color,
-            title: template.reopened.title,
-            description: template.reopened.description
-        }];
+        const categoryInfo = Object.values(config.guilds[guildId]).flat().find(r => r.id === categoryId);
+        const categoryStaff = categoryInfo.allowed_staff;
 
-        message.reply({ embeds: embed_user_added });
+        const memberHasRole = message.member.roles.cache
+            .filter((role) => categoryStaff.includes(role.id))
+            .map((role) => role.id);
 
-        updateToOpen(guildId, channelId);
+        if(categoryStaff.length > 0 && memberHasRole.length == 0) {
+            return message.reply('Solo el staff puede agregar usuarios al ticket.');
+        }
 
-        await wait(750);
+        if(args.length == 0) {
+            return message.reply('Debes mencionar el ID de los usuarios por agregar.');
+        }
 
-        message.guild.channels.fetch(channelId).then( (channelEdit) => {
-            var userCreator = getUserCreator(guildId, channelId);
-            var menu_id = getTicketCategory(guildId, channelId);
-            var category_info = Object.values(config.guilds[guildId]).flat().find(r => r.id === menu_id);
-
-            var permissions = [
-                { id: message.guild.roles.everyone.id, deny: [ 'VIEW_CHANNEL', 'READ_MESSAGE_HISTORY' ] },
-                { id: config.bot.clientId, allow: [ 'VIEW_CHANNEL', 'READ_MESSAGE_HISTORY', 'SEND_MESSAGES', 'MANAGE_CHANNELS', 'MANAGE_MESSAGES' ] },
-                { id: userCreator, allow: [ 'VIEW_CHANNEL', 'READ_MESSAGE_HISTORY', 'SEND_MESSAGES' ] }
-            ];
-
-            if(category_info.allowed_staff.length > 0) {
-                category_info.allowed_staff.forEach(staff => {
-                    permissions.push({ id: staff, allow: [ 'VIEW_CHANNEL', 'READ_MESSAGE_HISTORY', 'SEND_MESSAGES' ] });
-                });
+        const userToAdd = [];
+        args.forEach((user) => {
+            if(!isNaN(user)) {
+                var get_user = message.guild.members.fetch(user);
+                if(typeof get_user === 'undefined') {
+                    message.reply("No se ha encontrado al usuario con el ID `"+user+"` en este Discord.");
+                } else {
+                    userToAdd.push(user);
+                }
             }
-
-            message.guild.channels.fetch(channelId).edit({
-                permissionOverwrites: permissions
-            });
-            console.log(`[🎫] Ticket Reabierto | Categoria: ${category_info.name} | ID: ${channelEdit.name}`);
         });
+
+        var userCreator = getUserCreator(guildId, channelId);
+
+        var permissions = [
+            { id: message.guild.roles.everyone.id, deny: [ 'VIEW_CHANNEL', 'READ_MESSAGE_HISTORY' ] },
+            { id: config.bot.clientId, allow: [ 'VIEW_CHANNEL', 'READ_MESSAGE_HISTORY', 'SEND_MESSAGES', 'MANAGE_CHANNELS', 'MANAGE_MESSAGES' ] },
+            { id: userCreator, allow: [ 'VIEW_CHANNEL', 'READ_MESSAGE_HISTORY', 'SEND_MESSAGES' ] }
+        ];
+
+        if(categoryStaff.length > 0) {
+            categoryStaff.forEach(staff => {
+                permissions.push({ id: staff, allow: [ 'VIEW_CHANNEL', 'READ_MESSAGE_HISTORY', 'SEND_MESSAGES' ] });
+            });
+        }
+
+        // toDo :: add users
+
     } catch(error) {
         Sentry.withScope(function(scope) {
             scope.setTag('enviroment', 'production');
