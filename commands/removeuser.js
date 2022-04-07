@@ -3,7 +3,7 @@ const config = require('../data/config.json');
 const { template } = require('../data/embeds.json');
 
 // Internal functions
-const { isTicket, getUserCreator, getTicketCategory, addParticipant } = require('../functions/sqlite.js');
+const { isTicket, getUserCreator, getTicketCategory, removeParticipant } = require('../functions/sqlite.js');
 
 // Load Sentry Loggin resources
 const Sentry = require("@sentry/node");
@@ -69,9 +69,9 @@ exports.run = async (client, message, args) => {
                 permissionOverwrites: permissions
             });
 
-            addParticipant(guildId, channelId, userToAdd.user.id);
+            removeParticipant(guildId, channelId, userToAdd.user.id);
 
-            message.reply(`<@${userToAdd.user.id}> ha sido agregado al ticket!`);
+            message.reply(`<@${userToAdd.user.id}> ha sido eliminado delw ticket!`);
 
         }).catch((error) => {
             Sentry.withScope(function(scope) {

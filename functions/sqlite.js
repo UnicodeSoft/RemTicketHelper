@@ -74,19 +74,40 @@ module.exports = {
         });
     },
 
+    addParticipant: function(guild, channel, user) {
+        const query = sql.prepare(" INSERT INTO tickets_external_participants (guild, channel, user) VALUES (@gld, @chn, @usr); ");
+        query.run({
+            gld: guild,
+            chn: channel,
+            usr: user
+        });
+    },
+
+    removeParticipant: function(guild, channel, user) {
+        const query = sql.prepare(" DELETE FROM tickets_external_participants WHERE guild = @gld, channel = @chn AND user = @usr; ");
+        query.run({
+            gld: guild,
+            chn: channel,
+            usr: user
+        });
+    },
+
+    getParticipant: function(guild, channel) { // ver como loopear para retornar
+        const query = sql.prepare(" SELECT user FROM tickets_external_participants WHERE guild = ? AND channel = ? ");
+        if(query.get(guild, channel).count > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    },
+
     saveNewTicket: function(guild, category, channel, user) {
         dayjs.extend(timezone);
         dayjs.tz.setDefault(config.bot.timezone);
         const timestamp = dayjs().format('YYYY-MM-DD HH:mm:ss');
 
-        const query = sql.prepare(" INSERT INTO tickets (guild, category, channel, user, timestamp_creation) VALUES (@gld, @cat, @chn, @usr, @tms); ");
-        query.run({
-            gld: guild,
-            cat: category,
-            chn: channel,
-            usr: user,
-            tms: timestamp
-        });
+        const query = sql.prepare(" INSERT INTO tickets (guild, category, channel, user, timestamp_creation) VALUES (@g, @c, @x, @u, @t); ");
+        query.run({ g: guild, c: category, x: channel, u: user, t: timestamp });
     }
 
 };
