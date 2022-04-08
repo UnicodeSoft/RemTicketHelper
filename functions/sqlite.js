@@ -32,7 +32,7 @@ module.exports = {
 
     getCurTicketId: function(guild, channel) {
         const query = sql.prepare(" SELECT ticket FROM tickets WHERE guild = ? AND channel = ? ");
-        return query.get(guild, channel).ticket.toString().padStart(4, '0');
+        return query.get(guild, channel).ticket.toString().padStart(5, '0');
     },
 
     getUserCreator: function(guild, channel) {
@@ -84,7 +84,7 @@ module.exports = {
     },
 
     removeParticipant: function(guild, channel, user) {
-        const query = sql.prepare(" DELETE FROM tickets_external_participants WHERE guild = @gld, channel = @chn AND user = @usr; ");
+        const query = sql.prepare(" DELETE FROM tickets_external_participants WHERE guild = @gld AND channel = @chn AND user = @usr; ");
         query.run({
             gld: guild,
             chn: channel,
@@ -92,13 +92,9 @@ module.exports = {
         });
     },
 
-    getParticipant: function(guild, channel) { // ver como loopear para retornar
-        const query = sql.prepare(" SELECT user FROM tickets_external_participants WHERE guild = ? AND channel = ? ");
-        if(query.get(guild, channel).count > 0) {
-            return true;
-        } else {
-            return false;
-        }
+    getParticipants: function(guild, channel) {
+        const row = sql.prepare("SELECT user FROM tickets_external_participants WHERE channel = ? AND guild = ? ; ");
+        return row.all(channel, guild);
     },
 
     saveNewTicket: function(guild, category, channel, user) {

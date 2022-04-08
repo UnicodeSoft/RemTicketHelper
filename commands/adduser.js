@@ -3,7 +3,7 @@ const config = require('../data/config.json');
 const { template } = require('../data/embeds.json');
 
 // Internal functions
-const { isTicket, getUserCreator, getTicketCategory, addParticipant } = require('../functions/sqlite.js');
+const { isTicket, getUserCreator, getTicketCategory, addParticipant, getParticipants } = require('../functions/sqlite.js');
 
 // Load Sentry Loggin resources
 const Sentry = require("@sentry/node");
@@ -65,10 +65,17 @@ exports.run = async (client, message, args) => {
                 });
             }
 
+            console.log(getParticipants());
+            getParticipants().forEach(user => {
+                console.log(user);
+                permissions.push({ id: user.user, allow: [ 'VIEW_CHANNEL', 'READ_MESSAGE_HISTORY', 'SEND_MESSAGES' ] });
+            });
+
             channelEdit.edit({
                 permissionOverwrites: permissions
             });
 
+            // add control de existencia en la BD para evitar duplicación
             addParticipant(guildId, channelId, userToAdd.user.id);
 
             message.reply(`<@${userToAdd.user.id}> ha sido agregado al ticket!`);
