@@ -58,16 +58,24 @@ exports.run = async (client, message, args) => {
                 { id: userCreator, allow: [ 'VIEW_CHANNEL', 'READ_MESSAGE_HISTORY', 'SEND_MESSAGES' ] },
                 { id: userToAdd.user.id, allow: [ 'VIEW_CHANNEL', 'READ_MESSAGE_HISTORY', 'SEND_MESSAGES' ] } // meter en loop
             ];
-    
-            if(categoryStaff.length > 0) {
-                categoryStaff.forEach(staff => {
-                    permissions.push({ id: staff, allow: [ 'VIEW_CHANNEL', 'READ_MESSAGE_HISTORY', 'SEND_MESSAGES' ] });
-                });
+
+            categoryStaff.forEach(staff => {
+                permissions.push({ id: staff, allow: [ 'VIEW_CHANNEL', 'READ_MESSAGE_HISTORY', 'SEND_MESSAGES' ] });
+            });
+
+            const usersOnTicket = getParticipants(guildId, channelId);
+
+            avoidDuplicate = false;
+            usersOnTicket.forEach(user => {
+                if(user.user == userToAdd.user.id) {
+                    avoidDuplicate = true;
+                }
+            });
+            if(avoidDuplicate) {
+                return message.reply('Este usuario ya se encuentra en el ticket!');
             }
 
-            console.log(getParticipants());
-            getParticipants().forEach(user => {
-                console.log(user);
+            usersOnTicket.forEach(user => {
                 permissions.push({ id: user.user, allow: [ 'VIEW_CHANNEL', 'READ_MESSAGE_HISTORY', 'SEND_MESSAGES' ] });
             });
 
@@ -75,7 +83,6 @@ exports.run = async (client, message, args) => {
                 permissionOverwrites: permissions
             });
 
-            // add control de existencia en la BD para evitar duplicación
             addParticipant(guildId, channelId, userToAdd.user.id);
 
             message.reply(`<@${userToAdd.user.id}> ha sido agregado al ticket!`);

@@ -64,14 +64,13 @@ exports.run = async (client, message, args) => {
                 { id: config.bot.clientId, allow: [ 'VIEW_CHANNEL', 'READ_MESSAGE_HISTORY', 'SEND_MESSAGES', 'MANAGE_CHANNELS', 'MANAGE_MESSAGES' ] },
                 { id: userCreator, allow: [ 'VIEW_CHANNEL', 'READ_MESSAGE_HISTORY', 'SEND_MESSAGES' ] },
             ];
-    
-            if(categoryStaff.length > 0) {
-                categoryStaff.forEach(staff => {
-                    permissions.push({ id: staff, allow: [ 'VIEW_CHANNEL', 'READ_MESSAGE_HISTORY', 'SEND_MESSAGES' ] });
-                });
-            }
 
-            getParticipants().forEach(user => {
+            categoryStaff.forEach(staff => {
+                permissions.push({ id: staff, allow: [ 'VIEW_CHANNEL', 'READ_MESSAGE_HISTORY', 'SEND_MESSAGES' ] });
+            });
+
+            const usersOnTicket = getParticipants(guildId, channelId);
+            usersOnTicket.forEach(user => {
                 permissions.push({ id: user.user, allow: [ 'VIEW_CHANNEL', 'READ_MESSAGE_HISTORY', 'SEND_MESSAGES' ] });
             });
 
