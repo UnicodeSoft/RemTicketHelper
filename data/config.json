@@ -8,10 +8,6 @@
         "secDelTicket" : "10"
     },
 
-    "sentry" : {
-        "dsn" : "https://d3e05c16f8f0450bb8f3cc3752b7c390@o1168407.ingest.sentry.io/6260330"
-    },
-
     "guilds" : {
         "793908257672265799" : [
             {

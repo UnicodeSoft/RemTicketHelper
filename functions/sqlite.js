@@ -92,6 +92,13 @@ module.exports = {
         });
     },
 
+    removeUserFromTickets: function(user) {
+        const query = sql.prepare(" DELETE FROM tickets_external_participants WHERE user = @usr; ");
+        query.run({
+            usr: user
+        });
+    },
+
     getParticipants: function(guild, channel) {
         const row = sql.prepare("SELECT user FROM tickets_external_participants WHERE channel = ? AND guild = ? ; ");
         return row.all(channel, guild);

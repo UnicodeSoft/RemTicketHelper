@@ -1,6 +1,5 @@
 {
   "dependencies": {
-    "@sentry/node": "^6.18.2",
     "better-sqlite3": "^7.5.0",
     "cpu-stat": "^2.0.1",
     "dayjs": "^1.10.8",

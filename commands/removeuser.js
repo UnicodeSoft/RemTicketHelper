@@ -5,10 +5,6 @@ const { template } = require('../data/embeds.json');
 // Internal functions
 const { isTicket, getUserCreator, getTicketCategory, removeParticipant, getParticipants } = require('../functions/sqlite.js');
 
-// Load Sentry Loggin resources
-const Sentry = require("@sentry/node");
-Sentry.init({ dsn: config.sentry.dsn, tracesSampleRate: 1.0 });
-
 exports.run = async (client, message, args) => {
     try {
         const guildId = message.guildId;
@@ -86,26 +82,9 @@ exports.run = async (client, message, args) => {
             message.reply(`<@${userToRemove.user.id}> ha sido eliminado del ticket!`);
 
         }).catch((error) => {
-            Sentry.withScope(function(scope) {
-                scope.setTag('enviroment', 'production');
-                scope.setTag('bot_project', 'remtickethelper');
-                scope.setTag('error_type', 'channelEdit');
-                scope.setTag('file', 'removeuser.js');
-                scope.setLevel('error');
-                Sentry.captureException(error);
-            });
-            console.log('channelEdit', error);
+            console.error('removeUser::channelEdit', error);
         });
-
     } catch(error) {
-        Sentry.withScope(function(scope) {
-            scope.setTag('enviroment', 'production');
-            scope.setTag('bot_project', 'remtickethelper');
-            scope.setTag('error_type', 'try_catch');
-            scope.setTag('file', 'reopen.js');
-            scope.setLevel('error');
-            Sentry.captureException(error);
-        });
-        console.error('try', error);
+        console.error('removeUser::main', error);
     }
 }

@@ -5,10 +5,6 @@ const { template } = require('../data/embeds.json');
 // Internal functions
 const { isTicket, updateToDeleted, getTicketCategory } = require('../functions/sqlite.js');
 
-// Load Sentry Loggin resources
-const Sentry = require("@sentry/node");
-Sentry.init({ dsn: config.sentry.dsn, tracesSampleRate: 1.0 });
-
 // Other Dependencies
 const wait = require('node:timers/promises').setTimeout;
 
@@ -43,14 +39,6 @@ exports.run = async (client, message, args) => {
 
         toDelete.delete();
     } catch(error) {
-        Sentry.withScope(function(scope) {
-            scope.setTag('enviroment', 'production');
-            scope.setTag('bot_project', 'remtickethelper');
-            scope.setTag('error_type', 'try_catch');
-            scope.setTag('file', 'delete.js');
-            scope.setLevel('error');
-            Sentry.captureException(error);
-        });
-        console.error(error);
+        console.error('deleteTicket::main', error);
     }
 }

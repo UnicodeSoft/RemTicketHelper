@@ -5,10 +5,6 @@ const config = require('./data/config.json');
 const fs = require('fs');
 const { Client, Collection, Intents } = require('discord.js');
 
-// Load Sentry Loggin resources ============================================================================================
-const Sentry = require("@sentry/node");
-Sentry.init({ dsn: config.sentry.dsn, tracesSampleRate: 1.0 });
-
 // Define client Intents ===================================================================================================
 const client = new Client({
     partials: [ 'MESSAGE', 'REACTION', 'CHANNEL' ],
@@ -43,25 +39,9 @@ client.login(config.bot.token);
 
 // Handle Error ============================================================================================================
 process.on('unhandledRejection', (error) => {
-    Sentry.withScope(function(scope) {
-        scope.setTag('enviroment', 'production');
-        scope.setTag('bot_project', 'remtickethelper');
-        scope.setTag('error_type', 'unhandledRejection');
-        scope.setTag('file', 'index.js');
-        scope.setLevel('error');
-        Sentry.captureException(error);
-    });
-    console.error(error);
+    console.error('process::unhandledError', error);
 });
 
 client.on('shardError', (error) => {
-    Sentry.withScope(function(scope) {
-        scope.setTag('enviroment', 'production');
-        scope.setTag('bot_project', 'remtickethelper');
-        scope.setTag('error_type', 'shardError');
-        scope.setTag('file', 'index.js');
-        scope.setLevel('error');
-        Sentry.captureException(error);
-    });
-    console.error(error);
+    console.error('process::shardError', error);
 });

@@ -2,10 +2,6 @@
 const config = require('../data/config.json');
 const { template, footer } = require('../data/embeds.json');
 
-// Load Sentry Loggin resources
-const Sentry = require("@sentry/node");
-Sentry.init({ dsn: config.sentry.dsn, tracesSampleRate: 1.0 });
-
 // Custom functions 💜
 const {
     userTicketsOnCat,
@@ -230,15 +226,7 @@ module.exports = {
             }
 
         } catch (error) {
-            Sentry.withScope(function(scope) {
-                scope.setTag('enviroment', 'production');
-                scope.setTag('bot_project', 'remtickethelper');
-                scope.setTag('error_type', 'errorHandler');
-                scope.setTag('file', 'interactionCreate.js');
-                scope.setLevel('error');
-                Sentry.captureException(error);
-            });
-            console.error(error);
+            console.error('interactionCreate', error);
         }
     }
 };

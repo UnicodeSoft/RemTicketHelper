@@ -2,10 +2,6 @@
 const config = require('../data/config.json');
 const embed = require('../data/embeds.json');
 
-// Load Sentry Loggin resources
-const Sentry = require("@sentry/node");
-Sentry.init({ dsn: config.sentry.dsn, tracesSampleRate: 1.0 });
-
 // DiscordJs
 const { Client, Intents } = require("discord.js");
 const Discord = require("discord.js");
@@ -21,37 +17,20 @@ const os = require("os");
 exports.run = (client, message, args) => {
     try {
         cpuStat.usagePercent(function (error, percent, seconds) {
-            try {
-                message.reply({ embeds: [{
-                    color: 0x62d1f0,
-                    title: '💻 Información del bot y estado del servidor',
-                    fields: [
-                        { name: '🤖 NodeJS', value: "```"+process.version+"```" },
-                        { name: '👾 Discord.JS', value: "```v"+Discord.version+"```" },
-                        { name: '🏸 API Latency', value: "```"+cli.ws.ping+"ms```" },
-                        { name: '⌚️ Uptime', value: "```"+duration(cli.uptime).map(i=>i).join(", ")+"```" },
-                        { name: '🧮 Consumo Memoria', value: "```"+(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)+" de "+(os.totalmem() / 1024 / 1024).toFixed(2)+"Mb```" },
-                        { name: '🤖 Consumo CPU', value: "```"+percent.toFixed(2)+"%```" },
-                        { name: '💻 Sistema Operativo', value: "```"+os.platform()+" ("+os.arch()+")```" },
-                    ],
-                    thumbnail: embed.footer
-                }] });
-            } catch (error) {
-                message.reply({ embeds: [{
-                    color: 0x62d1f0,
-                    title: '💻 Información del bot y estado del servidor',
-                    fields: [
-                        { name: '🤖 NodeJS', value: "```"+process.version+"```" },
-                        { name: '👾 Discord.JS', value: "```v"+Discord.version+"```" },
-                        { name: '🏸 API Latency', value: "```"+cli.ws.ping+"ms```" },
-                        { name: '⌚️ Uptime', value: "```"+duration(cli.uptime).map(i=>i).join(", ")+"```" },
-                        { name: '🧮 Consumo Memoria', value: "```"+(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)+" de "+(os.totalmem() / 1024 / 1024).toFixed(2)+"Mb```" },
-                        { name: '🤖 Consumo CPU', value: "```"+percent.toFixed(2)+"%```" },
-                        { name: '💻 Sistema Operativo', value: "```"+os.platform()+" ("+os.arch()+")```" },
-                    ],
-                    thumbnail: embed.footer
-                }] });
-            }
+            message.reply({ embeds: [{
+                color: 0x62d1f0,
+                title: '💻 Información del bot y estado del servidor',
+                fields: [
+                    { name: '🤖 NodeJS', value: "```"+process.version+"```" },
+                    { name: '👾 Discord.JS', value: "```v"+Discord.version+"```" },
+                    { name: '🏸 API Latency', value: "```"+cli.ws.ping+"ms```" },
+                    { name: '⌚️ Uptime', value: "```"+duration(cli.uptime).map(i=>i).join(", ")+"```" },
+                    { name: '🧮 Consumo Memoria', value: "```"+(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)+" de "+(os.totalmem() / 1024 / 1024).toFixed(2)+"Mb```" },
+                    { name: '🤖 Consumo CPU', value: "```"+percent.toFixed(2)+"%```" },
+                    { name: '💻 Sistema Operativo', value: "```"+os.platform()+" ("+os.arch()+")```" },
+                ],
+                thumbnail: embed.footer
+            }] });
         });
 
         function duration(duration, useMilli = false) {
@@ -91,14 +70,6 @@ exports.run = (client, message, args) => {
             }
         }
     } catch(error) {
-        Sentry.withScope(function(scope) {
-            scope.setTag('enviroment', 'production');
-            scope.setTag('bot_project', 'remtickethelper');
-            scope.setTag('error_type', 'try_catch');
-            scope.setTag('file', 'info.js');
-            scope.setLevel('error');
-            Sentry.captureException(error);
-        });
-        console.error(error);
+        console.error('botInfo::main', error);
     }
 }

@@ -5,10 +5,6 @@ const { template } = require('../data/embeds.json');
 // Internal functions
 const { isTicket, getUserCreator, updateToClosed, getTicketCategory } = require('../functions/sqlite.js');
 
-// Load Sentry Loggin resources
-const Sentry = require("@sentry/node");
-Sentry.init({ dsn: config.sentry.dsn, tracesSampleRate: 1.0 });
-
 // DiscordJs
 const { MessageActionRow, MessageButton } = require('discord.js');
 
@@ -60,14 +56,6 @@ exports.run = async (client, message, args) => {
             console.log(`[🎫] Ticket Cerrado | Categoria: ${category_info.name} | ID: ${channelEdit.name}`);
         });
     } catch(error) {
-        Sentry.withScope(function(scope) {
-            scope.setTag('enviroment', 'production');
-            scope.setTag('bot_project', 'remtickethelper');
-            scope.setTag('error_type', 'try_catch');
-            scope.setTag('file', 'close.js');
-            scope.setLevel('error');
-            Sentry.captureException(error);
-        });
-        console.error(error);
+        console.error('closeTicket::main', error);
     }
 }
