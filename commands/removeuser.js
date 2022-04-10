@@ -28,11 +28,11 @@ exports.run = async (client, message, args) => {
             .map((role) => role.id);
 
         if(categoryStaff.length > 0 && memberHasRole.length == 0) {
-            return message.reply('Solo el staff puede agregar usuarios al ticket.');
+            return message.reply('Solo el staff puede eliminar usuarios del ticket.');
         }
 
         if(args.length == 0) {
-            return message.reply('Debes mencionar el ID de los usuarios por agregar.');
+            return message.reply('Debes mencionar el ID del usuario a eliminar del ticket.');
         }
 
         if(isNaN(userToRemove)) {
@@ -56,6 +56,11 @@ exports.run = async (client, message, args) => {
             if(userToRemove.user.id == userCreator) {
                 return message.reply("No puedes eliminar al creador del ticket.");
             }
+
+            categoryStaff.forEach(staff => {
+                roleStaff = staff;
+                permissions.push({ id: staff, allow: [ 'VIEW_CHANNEL', 'READ_MESSAGE_HISTORY', 'SEND_MESSAGES' ] });
+            });
 
             removeParticipant(guildId, channelId, userToRemove.user.id);
 
