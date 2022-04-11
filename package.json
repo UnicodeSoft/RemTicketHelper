@@ -9,14 +9,14 @@
   },
   "name": "remtickethelper",
   "description": "🎫 Sistema de tickets de soporte para discord",
-  "version": "1.0.5",
+  "version": "2.0.0",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/UnicodeSoft/RemTicketHelper_v1.git"
+    "url": "git+https://github.com/UnicodeSoft/RemTicketHelper.git"
   },
   "keywords": [
     "tickettool",
@@ -29,7 +29,7 @@
   "author": "KuroNeko",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/UnicodeSoft/RemTicketHelper_v1/issues"
+    "url": "https://github.com/UnicodeSoft/RemTicketHelper/issues"
   },
-  "homepage": "https://github.com/UnicodeSoft/RemTicketHelper_v1#readme"
+  "homepage": "https://github.com/UnicodeSoft/RemTicketHelper#readme"
 }
