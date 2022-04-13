@@ -53,11 +53,6 @@ exports.run = async (client, message, args) => {
                 return message.reply("No puedes eliminar al creador del ticket.");
             }
 
-            categoryStaff.forEach(staff => {
-                roleStaff = staff;
-                permissions.push({ id: staff, allow: [ 'VIEW_CHANNEL', 'READ_MESSAGE_HISTORY', 'SEND_MESSAGES' ] });
-            });
-
             removeParticipant(guildId, channelId, userToRemove.user.id);
 
             var permissions = [
