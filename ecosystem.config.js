@@ -3,12 +3,13 @@ module.exports = {
         name : "RemTicketHelper",
         script : "./index.js",
 
-        watch : true,
+        watch : false,
         max_restarts : 10,
 
         ignore_watch : [
-            'data/',
-            'logs/'
+            'data/db.sqlite',
+            'logs/errors.log',
+            'logs/out.log'
         ],
 
         log_date_format : 'YYYY-MM-DD HH:mm:ss',
