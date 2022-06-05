@@ -62,7 +62,7 @@ exports.run = (client, message, args) => {
             if(useMilli && time.milliseconds) {
                 parts.push(time.milliseconds + ' ms');
             }
-    
+
             if(parts.length === 0) {
                 return ['instantly']
             } else {
