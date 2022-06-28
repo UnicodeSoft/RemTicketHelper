@@ -6,8 +6,10 @@ Sistema de tickets de soporte para discord
 ### 🧰 Dependencias Utilizadas
 ```
 - NodeJS
-- DiscordJS
-- SQLite (BetterSQLite)
+• DiscordJS
+• SQLite (BetterSQLite)
+• fs (para la lectura de ficheros necesarios)
+• os & cpu-stat (para monitoreo de recursos)
 ```
 
 ### 📋 Como Instalar
@@ -21,17 +23,38 @@ npm update
 pm2 start
 ```
 
-### 💻 Sistema MultiGuilds
-El proyecto se ha creado inicialmente para utilizar en una sola guild a la vez pero, igualmente la misma está adaptada para poder operar en mas de una a la vez. El rendimiento en mas de 2 guilds no ha sido testeado.
-
-El VPS que base para los bots cuenta con `1Gb RAM / 25Gb SSD NVMe / 1vCPU`, actualmente no presentan falta de recursos, el consumo de CPU y RAM por cada bot es super ínfimo. Actualmente en 1 VPS estamos hosteando un total de 9 bots (para Discord y Twitch).
-
-
 ### 📚 Comandos Disponibles
-`$rt about` : Acerca del proyecto
-`$rt info`  : Ver estado del bot
+- `$rt about` Acerca del proyecto
+- `$rt info` Ver estado del bot
+- `$rt sendembed` Enviar mensaje con el menú de tickets
+- `$rt delete` Borrar un ticket de soporte
+- `$rt close` Cerrar un ticket
+- `$rt reopen` Reabrir un ticket cerrado
+- `$rt adduser user_id` Agregar un usuario al ticket
+- `$rt removeuser user_id` Eliminar un usuario del ticket
 
-`$rt sendembed` : Enviar mensaje con el menú de tickets
-`$rt delete` : Borrar un ticket de soporte
-`$rt close`  : Cerrar un ticket
-`$rt reopen` : Reabrir un ticket cerrado
+---
+
+### 💻 Sistema MultiGuilds
+El proyecto contempla la gestión de _tickets_ en múltiples servidores, hasta el momento se ha utilizado una instancia del proyecto para hasta 3 guilds y no ha demostrado variación en el consumo de recursos.
+
+El VPS utilizado para esta prueba consta de `1Gb RAM + 25Gb SSD NVMe + 1vCPU`, y no presentó en ningún momento falta de recursos.
+
+---
+### 📋 En proceso de prueba e implementación
+- [ ] Remake a la gestión de interacciones
+- [ ] Sistema de transcripción de tickets
+- [ ] Convertir todos los comandos a slash
+- [ ] Sistema de backup de la base de datos
+---
+
+### 📄 Licencia y Derechos
+Todos los derechos reservados para el trabajo realizado. <br>
+Se respetan así también los derechos y las licencias a todas las dependencias utilizadas en la realización de este proyecto.
+
+---
+
+<p align="center">
+    Proyecto protegido por la DMCA <br>
+    <a href="https://www.dmca.com/r/d0y5rx5"> <img src="https://kuroneko.im/web_assets/dmca.png"/> </a>
+</p>
