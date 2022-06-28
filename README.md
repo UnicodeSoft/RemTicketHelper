@@ -14,8 +14,14 @@ Sistema de tickets de soporte para discord
 
 ### 📋 Como Instalar
 ```js
-npm install
-npm update
+npm install // instalar las dependencias
+npm update  // actualizar las dependencias
+```
+
+### 🔍 Info adicional
+```
+Recuerda modificar en el archivo "ecosystem.config.js" el nombre
+Este es el que aparecerá en el monitor de pm2 
 ```
 
 ### 📋 PM2
