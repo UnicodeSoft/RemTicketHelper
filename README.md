@@ -30,14 +30,16 @@ pm2 start
 ```
 
 ### 📚 Comandos Disponibles
-- `$rt about` Acerca del proyecto
-- `$rt info` Ver estado del bot
-- `$rt sendembed` Enviar mensaje con el menú de tickets
-- `$rt delete` Borrar un ticket de soporte
-- `$rt close` Cerrar un ticket
-- `$rt reopen` Reabrir un ticket cerrado
-- `$rt adduser user_id` Agregar un usuario al ticket
-- `$rt removeuser user_id` Eliminar un usuario del ticket
+| Comando | Detalles |
+|:-------:|:--------:|
+| `$rt about`| Para ver información acerca de este proyecto |
+| `$rt info`| Ver información del servidor (recursos), uptime del bot y versión de d.js |
+| `$rt sendembed`| Para enviar en un canal específico, el embed con la lista de categorías |
+| `$rt close`| Cerrar el ticket de soporte en el que te encuentras |
+| `$rt delete`| Borrar el ticket de soporte en el que te encuentras |
+| `$rt reopen`| Reabrir el ticket de soporte en el que te encuentras |
+| `$rt adduser user_id`| Agregar un usuario al ticket de soporte en el que te encuentras |
+| `$rt removeuser user_id`| Eliminar un usuario del ticket de soporte en el que te encuentras |
 
 ---
 
