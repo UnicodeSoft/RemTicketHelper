@@ -77,5 +77,5 @@ Se respetan así también los derechos y las licencias a todas las dependencias 
 
 <p align="center">
     Proyecto protegido por la DMCA <br>
-    <a href="https://www.dmca.com/r/d0y5rx5"> <img src="https://kuroneko.im/web_assets/dmca.png"/> </a>
+    <a href="https://www.dmca.com/r/0mlxgll"> <img src="https://kuroneko.im/web_assets/dmca.png"/> </a>
 </p>
