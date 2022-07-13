@@ -5,7 +5,7 @@ Sistema de tickets de soporte para discord
 
 ### 🧰 Dependencias Utilizadas
 ```
-- NodeJS
+• NodeJS
 • DiscordJS
 • SQLite (BetterSQLite)
 • fs (para la lectura de ficheros necesarios)
