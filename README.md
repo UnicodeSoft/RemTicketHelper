@@ -12,11 +12,15 @@ Sistema de tickets de soporte para discord
 • os & cpu-stat (para monitoreo de recursos)
 ```
 
+<br>
+
 ### 📋 Como Instalar
 ```js
 npm install // instalar las dependencias
 npm update  // actualizar las dependencias
 ```
+
+<br>
 
 ### 🔍 Info adicional
 ```
@@ -24,10 +28,14 @@ Recuerda modificar en el archivo "ecosystem.config.js" el nombre
 Este es el que aparecerá en el monitor de pm2 
 ```
 
+<br>
+
 ### 📋 PM2
 ```
 pm2 start
 ```
+
+<br>
 
 ### 📚 Comandos Disponibles
 | Comando | Detalles |
@@ -41,20 +49,25 @@ pm2 start
 | `$rt adduser user_id`| Agregar un usuario al ticket de soporte en el que te encuentras |
 | `$rt removeuser user_id`| Eliminar un usuario del ticket de soporte en el que te encuentras |
 
----
+<br>
 
 ### 💻 Sistema MultiGuilds
-El proyecto contempla la gestión de _tickets_ en múltiples servidores, hasta el momento se ha utilizado una instancia del proyecto para hasta 3 guilds y no ha demostrado variación en el consumo de recursos.
+El proyecto contempla la gestión de _tickets_ en múltiples servidores, hasta el momento se ha utilizado una instancia del proyecto para hasta 3 guilds y no ha demostrado variación en el consumo de recursos. El VPS utilizado para esta prueba consta de `1Gb RAM + 25Gb SSD NVMe + 1vCPU`, y no presentó en ningún momento falta de recursos.
 
-El VPS utilizado para esta prueba consta de `1Gb RAM + 25Gb SSD NVMe + 1vCPU`, y no presentó en ningún momento falta de recursos.
+<br>
 
----
+### 📖 Documentación
+Podrás encontrar una documentación mas completa [aquí](https://imkuroneko.gitbook.io/remtickethelper/)
+
+<br>
+
 ### 📋 En proceso de prueba e implementación
 - [ ] Remake a la gestión de interacciones
 - [ ] Sistema de transcripción de tickets
 - [ ] Convertir todos los comandos a slash
 - [ ] Sistema de backup de la base de datos
----
+
+<br>
 
 ### 📄 Licencia y Derechos
 Todos los derechos reservados para el trabajo realizado. <br>
