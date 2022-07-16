@@ -217,7 +217,7 @@ module.exports = {
 
                             const toDelete = int.guild.channels.cache.get(channel);
 
-                            updateToDeleted(toDelete.guildId, toDelete.id);
+                            updateToDeleted(guild, toDelete.id);
 
                             toDelete.delete();
                         break;
