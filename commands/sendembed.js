@@ -9,6 +9,8 @@ exports.run = (client, message, args) => {
     try {
         message.delete();
 
+        if(message.author.id != config.bot.ownerId) { return; }
+
         const guild_id = message.guildId;
         var categorias = [];
 
