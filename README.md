@@ -1,7 +1,17 @@
-## 🎫 RemTicketHelper
-```
+<h2 align="center"> 🎫 RemTicketHelper </h2>
+
+<pre align="center">
 Sistema de tickets de soporte para discord
-```
+</pre>
+
+<p align="center">
+⚠ ⚠ <b>// Proyecto EOL //</b> ⚠ ⚠ <br>
+Este proyecto queda como una versión <code>Legacy</code>, por lo que no contará con actualizaciones y ya no será mantenido. <br>
+Actualmente se encuentra en desarrollo una versión mejorada del proyecto, con el cual se busca encarar varios aspectos nuevos en cuanto a seguridad, optimizaciones e implementaciones se refiere.
+</p>
+
+<br><br>
+
 
 ### 🧰 Dependencias Utilizadas
 ```
